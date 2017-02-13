@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="OSBBS")
-public class OSBB implements Serializable{
+public class Osbb implements Serializable{
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@NotEmpty
@@ -128,7 +128,7 @@ public class OSBB implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OSBB other = (OSBB) obj;
+		Osbb other = (Osbb) obj;
 		if (city == null) {
 			if (other.city != null)
 				return false;

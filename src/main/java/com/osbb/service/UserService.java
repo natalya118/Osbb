@@ -18,12 +18,9 @@ public interface UserService {
 	void updateUser(User user);
 	
 	void deleteUserBySSO(String sso);
-	
-	void applyForDisc(Request discipline);
 
 	List<User> findAllUsers(); 
 	
-	Set<Request> getStudDisc(String sso);
 	boolean isUserSSOUnique(Integer id, String sso);
 
 
