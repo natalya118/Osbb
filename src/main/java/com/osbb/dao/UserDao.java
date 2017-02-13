@@ -1,0 +1,25 @@
+package com.osbb.dao;
+
+import java.util.List;
+import java.util.Set;
+
+import com.osbb.model.Request;
+import com.osbb.model.User;
+
+
+public interface UserDao {
+
+	User findById(int id);
+	
+	User findBySSO(String sso);
+	
+	void save(User user);
+	
+	void deleteBySSO(String sso);
+	
+	List<User> findAllUsers();
+
+	Set<Request> getStudentDisc(User user);
+
+}
+
