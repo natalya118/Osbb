@@ -1,15 +1,12 @@
 package com.osbb.service;
 
 import java.util.List;
-import java.util.Set;
-
-import com.osbb.model.Request;
 import com.osbb.model.User;
 
 
 public interface UserService {
 	
-	User findById(int id);
+	User findById(String id);
 	
 	User findBySSO(String sso);
 	
@@ -21,7 +18,7 @@ public interface UserService {
 
 	List<User> findAllUsers(); 
 	
-	boolean isUserSSOUnique(Integer id, String sso);
+	boolean isUserSSOUnique(String string, String sso);
 
 
 }

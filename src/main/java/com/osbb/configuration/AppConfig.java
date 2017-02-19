@@ -20,7 +20,7 @@ import com.osbb.converter.RoleToUserProfileConverter;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.websystique.springmvc")
+@ComponentScan(basePackages = "com.osbb")
 public class AppConfig extends WebMvcConfigurerAdapter{
 	
 	
