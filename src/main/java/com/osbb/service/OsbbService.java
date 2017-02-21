@@ -7,16 +7,18 @@ import com.osbb.model.User;
 
 public interface OsbbService {
 
-	Osbb getOsbbById(String id);
+	Osbb getOsbbById(int id);
 	
-	void createOsbb(Osbb osbb);
+	Osbb getOsbbByCode(String code);
 	
 	void updateOsbb(Osbb osbb);
 	
-	void deleteOsbb(String Id);
+	void saveOsbb(Osbb osbb);
 	
-	void changeMainPerson(User person);
+	void deleteOsbb(int id);
 	
 	List<Osbb> getAllOsbb();
+	
+	boolean isOsbbCodeUnique(int id, String code);
 	
 }

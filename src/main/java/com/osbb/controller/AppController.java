@@ -46,13 +46,13 @@ import com.osbb.service.UserService;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("app/")
 @SessionAttributes("roles")
 public class AppController {
 
 	@Autowired
 	UserService userService;
-	
+	 
 	@Autowired
 	UserProfileService userProfileService;
 	

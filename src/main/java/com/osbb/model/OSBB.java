@@ -14,17 +14,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="OSBBS")
 public class Osbb implements Serializable{
-
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@NotEmpty
 	@Column(name="osbb_id", nullable=false)
 	private Integer id;
+	
+	
+	@NotEmpty
+	@Column(name="osbb_code",unique=true)
+	private String osbbCode;
 	
 	@NotEmpty
 	@Column(name="name", nullable=false)
@@ -34,15 +40,13 @@ public class Osbb implements Serializable{
 	@Column(name="city",nullable=false)
 	private String city;
 	
-	@NotEmpty
+	//@NotEmpty
 	@Column(name="date_created", nullable=false)
 	private Double dateCreated;
 	
-	@NotEmpty
-	@Column(name="osbb_code", nullable=false)
-	private String osbbCode;
+
 	
-	@NotEmpty
+	//@NotEmpty
 	@Column(name="creator_id")
 	private String creatorId;
 	
