@@ -2,6 +2,7 @@ package com.osbb.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -23,8 +25,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Osbb implements Serializable{
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@NotEmpty
-	@Column(name="osbb_id", nullable=false)
+	@Column(name="osbb_id")
 	private Integer id;
 	
 	
@@ -44,8 +45,9 @@ public class Osbb implements Serializable{
 	@Column(name="date_created", nullable=false)
 	private Double dateCreated;
 	
-
-	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "osbb")
+//	private Set<House> houses;
+//	
 	//@NotEmpty
 	@Column(name="creator_id")
 	private String creatorId;
@@ -106,7 +108,7 @@ public class Osbb implements Serializable{
 		this.mainPersonId = mainPersonId;
 	}
 
-	@NotEmpty
+	//@NotEmpty
 	@Column(name="main_person_id")
 	private String mainPersonId;
 

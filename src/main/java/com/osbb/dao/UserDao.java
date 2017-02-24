@@ -9,7 +9,7 @@ import com.osbb.model.User;
 
 public interface UserDao {
 
-	User findById(String string);
+	User findById(Integer integer);
 	
 	User findBySSO(String sso);
 	

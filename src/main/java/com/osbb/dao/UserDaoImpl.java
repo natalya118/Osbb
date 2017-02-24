@@ -21,7 +21,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
-	public User findById(int id) {
+	public User findById(Integer id) {
 		User user = getByKey(id);
 		if(user!=null){
 			Hibernate.initialize(user.getUserProfiles());
@@ -66,11 +66,6 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		delete(user);
 	}
 
-	@Override
-	public User findById(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }

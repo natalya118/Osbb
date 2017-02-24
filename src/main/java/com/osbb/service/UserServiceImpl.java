@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
     private PasswordEncoder passwordEncoder;
 	
-	public User findById(String id) {
+	public User findById(Integer id) {
 		return dao.findById(id);
 	}
 
@@ -62,9 +62,15 @@ public class UserServiceImpl implements UserService{
 		return dao.findAllUsers();
 	}
 
-	public boolean isUserSSOUnique(String id, String sso) {
+	public boolean isUserSSOUnique(Integer id, String sso) {
 		User user = findBySSO(sso);
 		return ( user == null || ((id != null) && (user.getId() == id)));
+	}
+
+	@Override
+	public User findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

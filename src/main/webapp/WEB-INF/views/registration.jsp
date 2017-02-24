@@ -17,7 +17,7 @@
 		<%@include file="authheader.jsp" %>
 
 		<div class="well lead">User Registration Form</div>
-	 	<form:form method="POST" modelAttribute="user" class="form-horizontal">
+	 	<form:form method="POST" modelAttribute="user" action="/SpringMVCHibernateWithSpringSecurityExample/newuser" class="form-horizontal">
 			<form:input type="hidden" path="id" id="id"/>
 			
 			<div class="row">
@@ -31,6 +31,7 @@
 					</div>
 				</div>
 			</div>
+	
 	
 			<div class="row">
 				<div class="form-group col-md-12">
@@ -111,13 +112,12 @@
 					</c:choose>
 				</div>
 			</div>
+			<div class="form-actions">
+
+				<input type="submit" value="Add" class="btn btn-primary " />
+				</div>
 		</form:form>
 		
-		<sec:authorize access="hasRole('ADMIN')">
-		 	<div class="well">
-		 		<a href="<c:url value='/newuser' />">Add New User</a>
-		 	</div>
-	 	</sec:authorize>
 	</div>
 </body>
 </html>

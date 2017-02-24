@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.access("hasRole('USER') or hasRole('ADMIN')")
 				.antMatchers("/", "/dlist")
 				.access("hasRole('USER') or hasRole('ADMIN')")
-				.antMatchers("/newuser/**", "/delete-user-*").access("hasRole('ADMIN')").antMatchers("/edit-user-*")
+				.antMatchers("/newuserdf/**", "/delete-user-*").access("hasRole('ADMIN')").antMatchers("/edit-userdf-*")
 				.access("hasRole('ADMIN') or hasRole('DBA')").and().formLogin().loginPage("/login")
 				.loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password").and()
 				.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)

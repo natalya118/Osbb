@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class User implements Serializable{
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String user_id;
+	private Integer id;
 
 	@NotEmpty
 	@Column(name="sso_id", unique=true, nullable=false)
@@ -37,9 +37,6 @@ public class User implements Serializable{
 	@Column(name="first_name", nullable=false)
 	private String firstName;
 
-	@NotEmpty
-	@Column(name="second_name", nullable=false)
-	private String secondName;
 	
 	@NotEmpty
 	@Column(name="last_name", nullable=false)
@@ -50,25 +47,27 @@ public class User implements Serializable{
 	@Column(name="email", nullable=false)
 	private String email;
 
-	@Column(name="phone")
-	private String phone;
+//	@Column(name="phone")
+//	private String phone;
+//	
 	
 	
-	
-	@Column(name="is_email_confirmed")
-	@NotEmpty
+//	@Column(name="is_email_confirmed")
+//	@NotEmpty
+//	private Boolean isEmailConfirmed;
+//	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "APP_USER_USER_PROFILE", 
              joinColumns = { @JoinColumn(name = "USER_ID") }, 
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles;
 
-	public String getId() {
-		return user_id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(String id) {
-		this.user_id = id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getSsoId() {
@@ -118,28 +117,4 @@ public class User implements Serializable{
 	public void setUserProfiles(Set<UserProfile> userProfiles) {
 		this.userProfiles = userProfiles;
 	}
-
-	
-	
-	
-	
-	
-	@NotEmpty
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = User.class)
-	@JoinTable(name = "APP_USER_DISCIPLINE", 
-             joinColumns = { @JoinColumn(name = "STUDENT_ID") }, 
-             inverseJoinColumns = { @JoinColumn(name = "DISCIPLINE_ID") })
-	private Set<Request> disciplines;
-	
-	
-	
-
-	
-	
-
-
-
-
-
-	
 }

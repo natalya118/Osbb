@@ -22,6 +22,10 @@ public class Realty {
 	@NotNull
 	@Column(name="realty_number_or_desc", length=40)
 	private String realtyNumberOrDesc;
+	
+	@ManyToOne
+	@JoinColumn(name="house_id")
+	private House house;
 
 	public String getRealtyId() {
 		return realtyId;

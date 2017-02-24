@@ -2,6 +2,7 @@ package com.osbb.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -29,7 +32,7 @@ public class House implements Serializable{
 	@NotEmpty
 	@Column(name="city", nullable=false)
 	private String city;
-
+ 
 	@NotEmpty
 	@Column(name="street", nullable=false)
 	private Double street;
@@ -39,7 +42,13 @@ public class House implements Serializable{
 	private String number;
 
 	
-	@NotEmpty
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "osbb_id", nullable = false)
+//	private Osbb osbb;
+	
+	@OneToMany(mappedBy="house")
+	private Set<Realty> realties;
+	
 	@Column(name="house_photo")
 	private byte[] HousePhoto;
 	//May be added

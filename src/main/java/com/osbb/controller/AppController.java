@@ -36,9 +36,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.osbb.model.Osbb;
 import com.osbb.model.Request;
 import com.osbb.model.User;
 import com.osbb.model.UserProfile;
+import com.osbb.service.OsbbService;
 import com.osbb.service.UserProfileService;
 import com.osbb.service.UserService;
 
@@ -46,7 +48,7 @@ import com.osbb.service.UserService;
 
 
 @Controller
-@RequestMapping("app/")
+@RequestMapping("/")
 @SessionAttributes("roles")
 public class AppController {
 
@@ -65,7 +67,9 @@ public class AppController {
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
 	
-	
+
+	@Autowired
+	OsbbService osbbService;
 	/**
 	 * This method will list all existing users.
 	 */
@@ -78,8 +82,6 @@ public class AppController {
 		return "userslist";
 	}
 	
-
-
 	/**
 	 * This method will provide the medium to add a new user.
 	 */
@@ -91,22 +93,14 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "registration";
 	}
-	
-	/**
-	 * This method will provide the medium to add a new user.
-	 */
 
-
-	/**
-	 * This method will be called on form submission, handling POST request for
-	 * saving user in database. It also validates the user input
-	 */
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
 	public String saveUser(@Valid User user, BindingResult result,
 			ModelMap model) {
 
 		if (result.hasErrors()) {
-			return "registration";
+			System.out.println(result.getAllErrors().toString());
+			return "test";
 		}
 
 		/*
@@ -120,7 +114,7 @@ public class AppController {
 		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
 			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
 		    result.addError(ssoError);
-			return "registration";
+			return "success";
 		}
 		
 		userService.saveUser(user);
@@ -131,6 +125,21 @@ public class AppController {
 		return "registrationsuccess";
 	}
 
+	@RequestMapping(value = { "/newosbb" }, method = RequestMethod.GET)
+	public String newOsbb(ModelMap model) {
+		Osbb osbb = new Osbb();
+		
+		model.addAttribute("osbb", osbb);
+		return "osbb_registration";
+	}
+
+	@RequestMapping(value = { "/newosbb" }, method = RequestMethod.POST)
+	public String saveOsbb(Osbb osbb, BindingResult result, ModelMap model) {
+		
+		osbbService.saveOsbb(osbb);
+
+		return "test";
+	}
 
 	/**
 	 * This method will provide the medium to update an existing user.
