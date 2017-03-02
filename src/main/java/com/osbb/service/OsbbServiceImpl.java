@@ -2,6 +2,7 @@ package com.osbb.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import com.osbb.model.Osbb;
 @Transactional
 public class OsbbServiceImpl implements OsbbService{
 
+	@Autowired
 	private OsbbDao dao;
 	@Override
 	public Osbb getOsbbById(int id) {
@@ -26,7 +28,7 @@ public class OsbbServiceImpl implements OsbbService{
 
 	@Override
 	public void saveOsbb(Osbb osbb) {
-		dao.saveOsbb(osbb);
+		dao.save(osbb);
 		
 	}
 

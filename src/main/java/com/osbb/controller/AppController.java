@@ -43,6 +43,7 @@ import com.osbb.model.UserProfile;
 import com.osbb.service.OsbbService;
 import com.osbb.service.UserProfileService;
 import com.osbb.service.UserService;
+import com.osbb.wrap.Osbb_Creator;
 
 
 
@@ -66,10 +67,10 @@ public class AppController {
 	
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
-	
 
 	@Autowired
 	OsbbService osbbService;
+	
 	/**
 	 * This method will list all existing users.
 	 */
@@ -121,23 +122,32 @@ public class AppController {
 
 		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " registered successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
+		
 		//return "success";
 		return "registrationsuccess";
 	}
 
 	@RequestMapping(value = { "/newosbb" }, method = RequestMethod.GET)
 	public String newOsbb(ModelMap model) {
-		Osbb osbb = new Osbb();
-		
-		model.addAttribute("osbb", osbb);
-		return "osbb_registration";
+		model.addAttribute("edit", false);
+		model.addAttribute("loggedinuser", getPrincipal());
+		model.addAttribute("osbb_creator", new Osbb_Creator());
+		return "main_reg_test";
 	}
 
 	@RequestMapping(value = { "/newosbb" }, method = RequestMethod.POST)
-	public String saveOsbb(Osbb osbb, BindingResult result, ModelMap model) {
+	public String saveOsbb(@Valid Osbb_Creator osbb_creator, BindingResult result,
+			ModelMap model) {
 		
-		osbbService.saveOsbb(osbb);
-
+		//Osbb osbb = osbb_creator.getOsbb();
+		
+			userService.saveUser(osbb_creator.getCreator());
+			
+			osbbService.saveOsbb(osbb_creator.getOsbb());
+			
+		model.addAttribute("loggedinuser", getPrincipal());
+		
+		
 		return "test";
 	}
 

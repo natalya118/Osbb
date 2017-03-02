@@ -17,7 +17,7 @@
 		<%@include file="authheader.jsp" %>
 
 		<div class="well lead">User Registration Form</div>
-	 	<form:form method="POST" modelAttribute="user" action="/SpringMVCHibernateWithSpringSecurityExample/newuser" class="form-horizontal">
+	 	<form:form method="POST" modelAttribute="user" action="/University/newuser" class="form-horizontal">
 			<form:input type="hidden" path="id" id="id"/>
 			
 			<div class="row">

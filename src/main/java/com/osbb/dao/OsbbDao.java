@@ -6,9 +6,10 @@ import com.osbb.model.Osbb;
 import com.osbb.model.User;
 
 public interface OsbbDao {
+	
 	Osbb getOsbbById(int id);
 	
-	void saveOsbb(Osbb osbb);
+	void save(Osbb osbb);
 	
 	void deleteById(int id);
 	

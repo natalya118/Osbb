@@ -3,7 +3,6 @@ package com.osbb.service;
 import java.util.List;
 
 import com.osbb.model.Osbb;
-import com.osbb.model.User;
 
 public interface OsbbService {
 

@@ -28,7 +28,7 @@ public class OsbbDaoImpl extends AbstractDao<Integer, Osbb> implements OsbbDao {
 
 
 	@Override
-	public void saveOsbb(Osbb osbb) {
+	public void save(Osbb osbb) {
 		persist(osbb);
 
 	}
