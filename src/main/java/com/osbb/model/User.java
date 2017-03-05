@@ -47,11 +47,12 @@ public class User implements Serializable{
 	@Column(name="email", nullable=false)
 	private String email;
 
-//	@Column(name="phone")
+
+	//	@Column(name="phone")
 //	private String phone;
 //	
-	
-	
+	@Column(name="house_id")
+	private int houseId;
 //	@Column(name="is_email_confirmed")
 //	@NotEmpty
 //	private Boolean isEmailConfirmed;
@@ -116,6 +117,16 @@ public class User implements Serializable{
 
 	public void setUserProfiles(Set<UserProfile> userProfiles) {
 		this.userProfiles = userProfiles;
+	}
+	
+	
+
+	public int getHouseId() {
+		return houseId;
+	}
+
+	public void setHouseId(int houseId) {
+		this.houseId = houseId;
 	}
 
 	@Override

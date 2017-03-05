@@ -151,6 +151,19 @@ public class AppController {
 		return "test";
 	}
 
+	@RequestMapping(value = { "/generatepasswords" }, method = RequestMethod.POST)
+	public String generatePasswords(BindingResult result,
+			ModelMap model) {
+		
+		//Osbb osbb = osbb_creator.getOsbb();
+		
+			
+		model.addAttribute("loggedinuser", getPrincipal());
+		
+		
+		return "test";
+	}
+	
 	/**
 	 * This method will provide the medium to update an existing user.
 	 */

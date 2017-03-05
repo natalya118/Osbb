@@ -21,7 +21,7 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="OSBBS")
+@Table(name="osbb")
 public class Osbb implements Serializable{
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class Osbb implements Serializable{
 	private String city;
 	
 	//@NotEmpty
-	@Column(name="date_created", nullable=false)
+	@Column(name="date_created")
 	private Double dateCreated;
 	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "osbb")
@@ -50,7 +50,7 @@ public class Osbb implements Serializable{
 //	
 	//@NotEmpty
 	@Column(name="creator_id")
-	private String creatorId;
+	private int creatorId;
 	
 	public Integer getId() {
 		return id;
@@ -92,11 +92,11 @@ public class Osbb implements Serializable{
 		this.osbbCode = osbbCode;
 	}
 
-	public String getCreatorId() {
+	public int getCreatorId() {
 		return creatorId;
 	}
 
-	public void setCreatorId(String creatorId) {
+	public void setCreatorId(int creatorId) {
 		this.creatorId = creatorId;
 	}
 
@@ -112,12 +112,14 @@ public class Osbb implements Serializable{
 	@Column(name="main_person_id")
 	private String mainPersonId;
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((creatorId == null) ? 0 : creatorId.hashCode());
+		result = prime * result + creatorId;
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((mainPersonId == null) ? 0 : mainPersonId.hashCode());
@@ -140,10 +142,7 @@ public class Osbb implements Serializable{
 				return false;
 		} else if (!city.equals(other.city))
 			return false;
-		if (creatorId == null) {
-			if (other.creatorId != null)
-				return false;
-		} else if (!creatorId.equals(other.creatorId))
+		if (creatorId != other.creatorId)
 			return false;
 		if (dateCreated == null) {
 			if (other.dateCreated != null)

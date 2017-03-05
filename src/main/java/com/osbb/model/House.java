@@ -26,12 +26,9 @@ public class House implements Serializable{
 	//@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	@NotEmpty
-	@Column(name="house_id", nullable=false)
-	private String HouseId;
+	@Column(name="id", nullable=false)
+	private int id;
 
-	@NotEmpty
-	@Column(name="city", nullable=false)
-	private String city;
  
 	@NotEmpty
 	@Column(name="street", nullable=false)
@@ -42,10 +39,6 @@ public class House implements Serializable{
 	private String number;
 
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "osbb_id", nullable = false)
-//	private Osbb osbb;
-	
 	@OneToMany(mappedBy="house")
 	private Set<Realty> realties;
 	
@@ -55,24 +48,15 @@ public class House implements Serializable{
 	//private double totalSquare;
 
 
-	public String getHouseId() {
-		return HouseId;
+	public int getHouseId() {
+		return id;
 	}
 
 
-	public void setHouseId(String houseId) {
-		HouseId = houseId;
+	public void setHouseId(int houseId) {
+		id = houseId;
 	}
 
-
-	public String getCity() {
-		return city;
-	}
-
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 
 	public Double getStreet() {
@@ -109,10 +93,10 @@ public class House implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((HouseId == null) ? 0 : HouseId.hashCode());
+		result = prime * result + id;
 		result = prime * result + Arrays.hashCode(HousePhoto);
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result + ((realties == null) ? 0 : realties.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		return result;
 	}
@@ -127,22 +111,19 @@ public class House implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		House other = (House) obj;
-		if (HouseId == null) {
-			if (other.HouseId != null)
-				return false;
-		} else if (!HouseId.equals(other.HouseId))
+		if (id != other.id)
 			return false;
 		if (!Arrays.equals(HousePhoto, other.HousePhoto))
-			return false;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
 			return false;
 		if (number == null) {
 			if (other.number != null)
 				return false;
 		} else if (!number.equals(other.number))
+			return false;
+		if (realties == null) {
+			if (other.realties != null)
+				return false;
+		} else if (!realties.equals(other.realties))
 			return false;
 		if (street == null) {
 			if (other.street != null)
@@ -153,11 +134,8 @@ public class House implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "House [HouseId=" + HouseId + ", city=" + city + ", street=" + street + ", number=" + number
-				+ ", HousePhoto=" + Arrays.toString(HousePhoto) + "]";
-	}
+
+
 	
 //	@NotEmpty
 //	@ManyToMany(fetch = FetchType.EAGER, targetEntity = User.class)

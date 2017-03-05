@@ -66,6 +66,13 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		delete(user);
 	}
 
+	@Override
+	public int getOsbbIdByUser(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 
 }

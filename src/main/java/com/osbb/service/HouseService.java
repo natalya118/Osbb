@@ -6,13 +6,13 @@ import com.osbb.model.House;
 
 public interface HouseService {
 
-	House getHouseById(String id);
+	House getHouseById(int id);
 	
-	void createHouse(House house);
+	void saveHouse(House house);
 	
 	void updateHouse(House house);
 	
-	void deleteHouse(String id);
+	void deleteHouse(int id);
 	
 	List<House> getAllHouses();
 }

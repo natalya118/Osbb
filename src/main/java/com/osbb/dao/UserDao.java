@@ -18,8 +18,8 @@ public interface UserDao {
 	void deleteBySSO(String sso);
 	
 	List<User> findAllUsers();
-
-	Set<Request> getStudentDisc(User user);
+	
+	int getOsbbIdByUser(User user);
 
 }
 
