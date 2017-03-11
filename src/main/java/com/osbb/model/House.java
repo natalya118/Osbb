@@ -38,7 +38,40 @@ public class House implements Serializable{
 	@Column(name="number", nullable=false)
 	private String number;
 
+	@NotEmpty
+	@Column
+	private int osbbid;
 	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getOsbbid() {
+		return osbbid;
+	}
+
+
+	public void setOsbbid(int osbbid) {
+		this.osbbid = osbbid;
+	}
+
+
+	public Set<Realty> getRealties() {
+		return realties;
+	}
+
+
+	public void setRealties(Set<Realty> realties) {
+		this.realties = realties;
+	}
+
+
 	@OneToMany(mappedBy="house")
 	private Set<Realty> realties;
 	
@@ -93,9 +126,10 @@ public class House implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		//result = prime * result + Arrays.hashCode(HousePhoto);
 		result = prime * result + id;
-		result = prime * result + Arrays.hashCode(HousePhoto);
 		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result + osbbid;
 		result = prime * result + ((realties == null) ? 0 : realties.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		return result;
@@ -111,14 +145,15 @@ public class House implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		House other = (House) obj;
+
 		if (id != other.id)
-			return false;
-		if (!Arrays.equals(HousePhoto, other.HousePhoto))
 			return false;
 		if (number == null) {
 			if (other.number != null)
 				return false;
 		} else if (!number.equals(other.number))
+			return false;
+		if (osbbid != other.osbbid)
 			return false;
 		if (realties == null) {
 			if (other.realties != null)
@@ -132,7 +167,6 @@ public class House implements Serializable{
 			return false;
 		return true;
 	}
-
 
 
 

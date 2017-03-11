@@ -17,50 +17,50 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.messaging.simp.user.SimpSession;
+import org.springframework.messaging.simp.user.SimpUser;
 
 @Entity
-@Table(name="USERS")
-public class User implements Serializable{
+@Table(name = "USERS")
+public class User implements Serializable {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@NotEmpty
-	@Column(name="sso_id", unique=true, nullable=false)
+	@Column(name = "sso_id", unique = true, nullable = false)
 	private String ssoId;
-	
+
 	@NotEmpty
-	@Column(name="password", nullable=false)
+	@Column(name = "password", nullable = false)
 	private String password;
-		
+
 	@NotEmpty
-	@Column(name="first_name", nullable=false)
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	
 	@NotEmpty
-	@Column(name="last_name", nullable=false)
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
 	@NotEmpty
 	@Email
-	@Column(name="email", nullable=false)
+	@Column(name = "email", nullable = false)
 	private String email;
 
-
-	//	@Column(name="phone")
-//	private String phone;
-//	
-	@Column(name="house_id")
-	private int houseId;
-//	@Column(name="is_email_confirmed")
-//	@NotEmpty
-//	private Boolean isEmailConfirmed;
-//	
+	// @Column(name="phone")
+	// private String phone;
+	//
+	@Column
+	private int osbbId;
+	// @Column(name="is_email_confirmed")
+	// @NotEmpty
+	// private Boolean isEmailConfirmed;
+	//
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "APP_USER_USER_PROFILE", 
-             joinColumns = { @JoinColumn(name = "USER_ID") }, 
-             inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
+	@JoinTable(name = "APP_USER_USER_PROFILE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
+			@JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles;
 
 	public Integer getId() {
@@ -118,15 +118,13 @@ public class User implements Serializable{
 	public void setUserProfiles(Set<UserProfile> userProfiles) {
 		this.userProfiles = userProfiles;
 	}
-	
-	
 
-	public int getHouseId() {
-		return houseId;
+	public int getOsbbId() {
+		return osbbId;
 	}
 
-	public void setHouseId(int houseId) {
-		this.houseId = houseId;
+	public void setOsbbId(int osbbId) {
+		this.osbbId = osbbId;
 	}
 
 	@Override
@@ -134,5 +132,5 @@ public class User implements Serializable{
 		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", email=" + email + ", userProfiles=" + userProfiles + "]";
 	}
-	
+
 }
