@@ -14,16 +14,16 @@ function setConnected(connected) {
 
 function connect() {
 	console.log("before");
-    var socket = new SockJS('/osbb/chat');
+    var socket = new SockJS('/osbb/chat1');
     console.log("before2");
     stompClient = Stomp.over(socket);
    
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/chat/mess1', function (message) {
+        stompClient.subscribe('/topic/messages', function () {
         	console.log("before3");
-            showGreeting(JSON.parse(greeting.body).content);
+            
         });
     });
 }
@@ -37,7 +37,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/osbb/mess1", {}, JSON.stringify({'text': $("#newmess").val(), 'chatid': 1}));
+    stompClient.send("/app/chat1", {}, JSON.stringify({'from': $("#newmess").val(), 'text': 1}));
 }
 
 function showGreeting(message) {

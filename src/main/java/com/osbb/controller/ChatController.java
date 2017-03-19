@@ -13,10 +13,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.osbb.model.User;
 import com.osbb.model.chats.Chat;
+import com.osbb.model.chats.MTest;
 import com.osbb.model.chats.Message;
 import com.osbb.service.ChatService;
 import com.osbb.service.UserProfileService;
@@ -57,6 +59,16 @@ public class ChatController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "chats";
 	}
+	@RequestMapping(value = { "/", "/alljson" }, method = RequestMethod.GET)
+	@ResponseBody 
+	public List<Chat> chats(ModelMap model) {
+
+		List<Chat> chats = chatService.getAllChats(1);
+		//List<Chat> chats = chatService.getAllChats(userService.findBySSO(getPrincipal()).getId());
+		model.addAttribute("chats", chats);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return chats;
+	}
 	
 	@RequestMapping(value = { "/", "/mess{chatid}" }, method = RequestMethod.GET)
 	public String chatMessages(@PathVariable int chatid, ModelMap model) {
@@ -66,12 +78,13 @@ public class ChatController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "chat_view";
 	}
-	@MessageMapping("/chat")
+	@MessageMapping("/chat1")
     @SendTo("/topic/messages")
-    public Message mess(String text,int chatid) throws Exception {
+    public MTest mess(final MTest mess) throws Exception {
         Thread.sleep(1000); // simulated delay
-        Message mess = new Message(userService.findBySSO(getPrincipal()).getId(), text, chatid);
-        //messageService.saveMessage(mess);
         return mess;
+        //return new Message(userService.findBySSO(getPrincipal()).getId(), text, chatid);
+        //messageService.saveMessage(mess);
+        
     }
 }
