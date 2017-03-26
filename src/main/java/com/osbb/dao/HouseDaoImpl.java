@@ -40,8 +40,9 @@ public class HouseDaoImpl extends AbstractDao<Integer, House> implements HouseDa
 
 
 	public List<House> findAllHousesByOsbbId(int osbbId) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("osbbid", osbbId));
+		return crit.list();
 	}
 
 

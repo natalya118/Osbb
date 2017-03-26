@@ -1,21 +1,26 @@
 package com.osbb.model.chats;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table
-public class UserChat {
+@IdClass(UserChatId.class)
+public class UserChat implements Serializable{
 	
-	//TODO implement composite primary key
-	@Id
-	@Column
-	private int userId;
+	@Id private int userId;
 	
-	@Column
-	private int chatId;
+	@Id private int chatId;
+
+	public UserChat(int userId, int chatId) {
+		super();
+		this.userId = userId;
+		this.chatId = chatId;
+	}
 	
 
 }

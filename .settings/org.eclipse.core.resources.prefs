@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/chats.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/left_menu.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/login.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/main_reg_test.jsp=UTF-8

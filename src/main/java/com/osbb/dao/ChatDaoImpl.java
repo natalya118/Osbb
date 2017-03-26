@@ -57,9 +57,12 @@ public class ChatDaoImpl extends AbstractDao<Integer, Chat> implements ChatDao{
 	}
 
 	public List<Message> getChatMessages(int chatid) {
-		Session session = sessionFactory.getCurrentSession();
-	    
-	    List<Message> mess = (List<Message>) session.createQuery("from Message m where m.chatId = :chat_id").setParameter("chat_id", chatid).list();
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("chatId", chatid));
+		List<Message> mess = (List<Message>) crit.list();
+
+//		Session session = sessionFactory.getCurrentSession();
+//	    List<Message> mess = (List<Message>) session.createQuery("from Message m where m.chatId = :chat_id").setParameter("chat_id", chatid).list();
 	    return mess;
 	}
 

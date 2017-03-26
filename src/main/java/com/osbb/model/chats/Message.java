@@ -1,6 +1,7 @@
 package com.osbb.model.chats;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -39,11 +40,17 @@ public class Message {
 	private String messageText;
 
 	//@NotEmpty
-//	@Column(name = "date_added")
-//	private Date dateAdded;
+	@Column(name = "date_added")
+	private Date dateAdded;
 
-	@Column(name = "date_changed")
-	private Date dateChanged;
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
+	}
+//	@Column(name = "date_changed")
+//	private Date dateChanged;
 
 	public int getMessageId() {
 		return messageId;
@@ -85,20 +92,22 @@ public class Message {
 //		this.dateAdded = dateAdded;
 //	}
 
-	public Date getDateChanged() {
-		return dateChanged;
-	}
-
-	public void setDateChanged(Date dateChanged) {
-		this.dateChanged = dateChanged;
-	}
+//	public Date getDateChanged() {
+//		return dateChanged;
+//	}
+//
+//	public void setDateChanged(Date dateChanged) {
+//		this.dateChanged = dateChanged;
+//	}
 
 	@Override
 	public String toString() {
 		return "Message [messageId=" + messageId + ", chatId=" + chatId + ", authorId=" + authorId + ", messageText="
 				+ messageText + ", dateAdded=" + 
-//				dateAdded + 
-				", dateChanged=" + dateChanged + "]";
+				dateAdded + 
+				", dateChanged=" + 
+				//dateChanged +
+				"]";
 	}
 
 }

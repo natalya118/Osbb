@@ -58,7 +58,7 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public List<Message> getChatMessages(int chatid) {
-		return mdao.getChatMessages(dao.findById(1));
+		return mdao.getChatMessages(dao.findById(chatid));
 	}
 
 }

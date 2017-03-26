@@ -46,7 +46,7 @@ public class MessageDaoImpl extends AbstractDao<Integer, Message> implements Mes
 	public List<Message> getChatMessages(Chat chat) {
 		Criteria crit = createEntityCriteria();
 
-		crit.add(Restrictions.eq("chatId", 1));
+		crit.add(Restrictions.eq("chatId", chat.getId()));
 		//crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Message> messages = crit.list();
 		return messages;

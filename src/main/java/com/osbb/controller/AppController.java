@@ -145,11 +145,15 @@ public class AppController {
 	public String saveOsbb(@Valid Osbb_Creator osbb_creator, BindingResult result,
 			ModelMap model) {
 		
-		//Osbb osbb = osbb_creator.getOsbb();
+		Osbb osbb = osbb_creator.getOsbb();
 		
-			userService.saveUser(osbb_creator.getCreator());
 			
-			osbbService.saveOsbb(osbb_creator.getOsbb());
+			
+			osbbService.saveOsbb(osbb);
+
+			User newUser = osbb_creator.getCreator();
+			newUser.setOsbbId(osbb.getId());
+			userService.saveUser(newUser);
 			
 		model.addAttribute("loggedinuser", getPrincipal());
 		

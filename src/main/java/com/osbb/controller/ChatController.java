@@ -1,9 +1,12 @@
 package com.osbb.controller;
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,11 +24,13 @@ import com.osbb.model.chats.Chat;
 import com.osbb.model.chats.MTest;
 import com.osbb.model.chats.Message;
 import com.osbb.service.ChatService;
+import com.osbb.service.MessageService;
 import com.osbb.service.UserProfileService;
 import com.osbb.service.UserService;
 
 @Controller
 @SessionAttributes("roles")
+@RequestMapping("/chats")
 public class ChatController {
 
 	@Autowired
@@ -40,6 +45,8 @@ public class ChatController {
 	@Autowired
 	ChatService chatService;
 	
+	@Autowired
+	MessageService messageService;
 	private String getPrincipal(){
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -70,21 +77,29 @@ public class ChatController {
 		return chats;
 	}
 	
-	@RequestMapping(value = { "/", "/mess{chatid}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/{chatid}" }, method = RequestMethod.GET)
 	public String chatMessages(@PathVariable int chatid, ModelMap model) {
 
-		List<Message> messages = chatService.getChatMessages(1);
+		System.out.println("chat id ------------------ " + chatid);
+		List<Message> messages = chatService.getChatMessages(chatid);
+
 		model.addAttribute("messages", messages);
+		Chat chat = chatService.getChatById(chatid);
+		model.addAttribute("chat", chat);
 		model.addAttribute("loggedinuser", getPrincipal());
+		
 		return "chat_view";
+		
 	}
-	@MessageMapping("/chat1")
-    @SendTo("/topic/messages")
-    public MTest mess(final MTest mess) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        return mess;
-        //return new Message(userService.findBySSO(getPrincipal()).getId(), text, chatid);
-        //messageService.saveMessage(mess);
+	
+	@MessageMapping("/chat/{id}")
+    @SendTo("/topic/messages/{id}")
+    public Message mess(@DestinationVariable String id,final Message mess) throws Exception {
+		mess.setDateAdded(new Date());
+		
+		messageService.saveMessage(mess);
+		
+       return mess;
         
     }
 }

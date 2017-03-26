@@ -14,5 +14,7 @@ public interface HouseService {
 	
 	void deleteHouse(int id);
 	
-	List<House> getAllHouses();
+	List<House> getAllHouses(int osbbId);
+	
+	void generateUsersCredentials(List<Integer> flats, int houseId);
 }

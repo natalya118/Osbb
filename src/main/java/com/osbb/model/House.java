@@ -23,16 +23,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="Houses")
 public class House implements Serializable{
 
-	//@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Id
-	@NotEmpty
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", nullable=false)
 	private int id;
 
  
 	@NotEmpty
 	@Column(name="street", nullable=false)
-	private Double street;
+	private String street;
 	
 	@NotEmpty
 	@Column(name="number", nullable=false)
@@ -74,11 +72,6 @@ public class House implements Serializable{
 
 	@OneToMany(mappedBy="house")
 	private Set<Realty> realties;
-	
-	@Column(name="house_photo")
-	private byte[] HousePhoto;
-	//May be added
-	//private double totalSquare;
 
 
 	public int getHouseId() {
@@ -92,12 +85,12 @@ public class House implements Serializable{
 
 
 
-	public Double getStreet() {
+	public String getStreet() {
 		return street;
 	}
 
 
-	public void setStreet(Double street) {
+	public void setStreet(String street) {
 		this.street = street;
 	}
 
@@ -112,14 +105,6 @@ public class House implements Serializable{
 	}
 
 
-	public byte[] getHousePhoto() {
-		return HousePhoto;
-	}
-
-
-	public void setHousePhoto(byte[] housePhoto) {
-		HousePhoto = housePhoto;
-	}
 
 
 	@Override
