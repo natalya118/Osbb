@@ -2,6 +2,7 @@ package com.osbb.service;
 
 import java.util.List;
 
+import com.osbb.model.User;
 import com.osbb.model.chats.Chat;
 import com.osbb.model.chats.Message;
 
@@ -18,4 +19,8 @@ public interface ChatService {
 	List<Chat> getAllChats(int userid);
 	
 	List<Message> getChatMessages(int chatid);
+	
+	List<User> getChatMembers(int id);
+	
+	void addUserToChat(int chatId, int userId);
 }

@@ -18,6 +18,9 @@ public class Chat implements Serializable{
 	@Column
 	private String topic;
 
+	@Column
+	private int osbbId;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -32,6 +35,14 @@ public class Chat implements Serializable{
 
 	public void setTopic(String topic) {
 		this.topic = topic;
+	}
+
+	public int getOsbbId() {
+		return osbbId;
+	}
+
+	public void setOsbbId(int osbbId) {
+		this.osbbId = osbbId;
 	}
 	
 	//private List<Message> messages;

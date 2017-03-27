@@ -18,6 +18,7 @@ public interface UserService {
 
 	List<User> findAllUsers(); 
 	
+	List<User> findAllUsers(int osbbId); 
 	boolean isUserSSOUnique(Integer id, String sso);
 
 

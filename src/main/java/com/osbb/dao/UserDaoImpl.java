@@ -66,10 +66,17 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		delete(user);
 	}
 
-	@Override
+	
 	public int getOsbbIdByUser(User user) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	public List<User> getUsersByOsbb(int osbbId) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("osbbId", osbbId));
+		return crit.list();
 	}
 
 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.osbb.dao.ChatDao;
 import com.osbb.dao.MessageDao;
+import com.osbb.model.User;
 import com.osbb.model.chats.Chat;
 import com.osbb.model.chats.Message;
 
@@ -59,6 +60,19 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public List<Message> getChatMessages(int chatid) {
 		return mdao.getChatMessages(dao.findById(chatid));
+	}
+
+
+	@Override
+	public List<User> getChatMembers(int id) {
+		return dao.getChatUsers(id);
+	}
+
+
+	@Override
+	public void addUserToChat(int chatId, int userId) {
+		dao.addUserToChat(chatId, userId);
+		
 	}
 
 }

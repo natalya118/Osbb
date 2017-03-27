@@ -17,7 +17,7 @@ public class UserChat implements Serializable{
 	@Id private int chatId;
 
 	public UserChat(int userId, int chatId) {
-		super();
+		
 		this.userId = userId;
 		this.chatId = chatId;
 	}

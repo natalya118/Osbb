@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -48,100 +46,140 @@
 <link
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
+
+<script type="text/javascript">
+function getUsers(){
+	var sList = [];
+	$('input[type=checkbox]').each(
+			function() {
+				if(this.checked)
+				sList.push($(this).val());
+			});
+	$('#chatusers').val(sList.toString());
+	
+}
+	function doAjax() {
+		var csrfParameter = '${_csrf.parameterName}';
+		var csrfToken = '${_csrf.token}';
+		//var inputText = $("#input_str").val();
+		var sList = "";
+		$('input[type=checkbox]').each(
+				function() {
+					sList += "(" + $(this).val() + "-"
+							+ (this.checked ? "checked" : "not checked") + ")";
+				});
+		console.log(sList);
+
+		var topic = $('#new-dialog-input').val();
+		console.log('topic ' + topic);
+		var csrfParameter = '${_csrf.parameterName}';
+		var csrfToken = '${_csrf.token}';
+		$.ajax({
+			url : '/chats/newchat',
+			type : 'POST',
+			dataType : 'json',
+			contentType : 'application/json',
+			mimeType : 'application/json',
+			data : ({
+				chatId : 1,
+				users : sList,
+				csrfParameter : csrfToken
+			}),
+			success : function(data) {
+
+				console.log("efefefefwfw");
+			}
+		});
+	}
+</script>
 </head>
 
 <body>
-<div class="supreme-container">
-	<%@include file="left_menu.jsp"%>
-	
-	<div class="container clearfix">
-		<div class="people-list" id="people-list">
-			<button class="new-dialog" data-toggle="modal"
-				data-target="#new-dialog-modal">
-				<i class="fa fa-plus"></i><span>Новий діалог</span>
-			</button>
+	<div class="supreme-container">
+		<%@include file="left_menu.jsp"%>
 
-			<div class="search">
-				<input type="text" placeholder="search" /> <i class="fa fa-search"></i>
+		<div class="container clearfix">
+			<div class="people-list" id="people-list">
+				<button class="new-dialog" data-toggle="modal"
+					data-target="#new-dialog-modal">
+					<i class="fa fa-plus"></i><span>Новий діалог</span>
+				</button>
+
+				<div class="search">
+					<input type="text" placeholder="search" /> <i class="fa fa-search"></i>
+				</div>
+
+
+				<ul class="list">
+					<c:forEach items="${chats}" var="chat">
+						<li class="clearfix">
+							<div class="about">
+								<div class="name">
+									<a href="<c:url value='/chats/${chat.id}' />"
+										class="tochat${chat.id}">${chat.topic}</a>
+								</div>
+								<div class="status">
+									<i class="fa fa-circle online"></i> в мережі
+								</div>
+								<div class="last-messsage">
+									<div class="last-message-text">Останнє повідомлення</div>
+									<div class="last-message-time">10:10, Сьогодні</div>
+								</div>
+							</div></li>
+
+					</c:forEach>
+
+				</ul>
 			</div>
-
-
-			<ul class="list">
-				<c:forEach items="${chats}" var="chat">
-					<li class="clearfix"><img
-						src="http://static.boredpanda.com/blog/wp-content/uploads/2016/04/beautiful-fluffy-cat-british-longhair-2.jpg"
-						alt="avatar" />
-						<div class="about">
-							<div class="name">
-								<a href="<c:url value='/chats/${chat.id}' />"
-									class="tochat${chat.id}">${chat.topic}</a>
-							</div>
-							<div class="status">
-								<i class="fa fa-circle online"></i> в мережі
-							</div>
-							<div class="last-messsage">
-								<div class="last-message-text">Останнє повідомлення</div>
-								<div class="last-message-time">10:10, Сьогодні</div>
-							</div>
-						</div></li>
-
-				</c:forEach>
-
-			</ul>
 		</div>
 	</div>
-</div>
 	<div id="new-dialog-modal" class="modal fade" role="dialog">
-	<form:form method="POST" modelAttribute="osbb_creator"
-			action="/osbb/newosbb" id="msform">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Новий діалог</h4>
-				</div>
-				<div class="modal-body">
-					<input type="text" placeholder="Назва бесіди" id="new-dialog-input" />
-					<div class="new-dialog-list">
-						<ul class="list">
-							<li class="clearfix">
-								<div class="about">
-									<div class="name">Котя</div>
-									<div class="status">
-										<i class="fa fa-circle online"></i> в мережі
-									</div>
-									<div class="toggles">
-										<input type="checkbox" name="checkbox1" id="checkbox1"
-											class="ios-toggle" /> <label for="checkbox1"
-											class="checkbox-label" data-off="Додати до бесіди"
-											data-on="Видалити з бесіди"></label>
-									</div>
-								</div></li>
-							<li class="clearfix">
-								<div class="about">
-									<div class="name">Котя</div>
-									<div class="status">
-										<i class="fa fa-circle online"></i> в мережі
-									</div>
-									<div class="toggles-container">
-										<div class="toggles">
-											<input type="checkbox" name="checkbox2" id="checkbox2"
-												class="ios-toggle" /> <label for="checkbox2"
-												class="checkbox-label" data-off="Додати до бесіди"
-												data-on="Видалити з бесіди"></label>
+		<form:form modelAttribute="chat_users" method="POST" 
+			action="/osbb/chats/newchat">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Новий діалог</h4>
+					</div>
+					<div class="modal-body">
+						<form:input path="newChatTopic" type="text" placeholder="Назва бесіди"
+							id="new-dialog-input" />
+						<div class="new-dialog-list">
+							<ul class="list">
+
+								<c:forEach items="${allusers}" var="u">
+									<li class="clearfix">
+										<div class="about">
+											<div class="name">${u.ssoId}</div>
+											<div class="status">
+												<i class="fa fa-circle online"></i> в мережі
+											</div>
+											<div class="toggles">
+												<input type="checkbox" name="checkbox1" id="checkbox1"
+													value="${u.ssoId}" class="ios-toggle" /> <label
+													for="checkbox1" class="checkbox-label"
+													data-off="Додати до бесіди" data-on="Видалити з бесіди"></label>
+											</div>
 										</div>
-									</div>
-								</div></li>
-						</ul>
+									</li>
+								</c:forEach>
+
+							</ul>
+							<form:input path ="ustr" name="ustr" type="hidden" id="chatusers"
+					/>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="form-actions">
+							<input onClick="getUsers()" type="submit" value="Додати" class="add-dialog-btn">
+						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="add-dialog-btn">Додати</button>
-				</div>
+				
 			</div>
-
-		</div>
 		</form:form>
+
 	</div>
 </body>
 </html>

@@ -20,6 +20,7 @@ public interface UserDao {
 	List<User> findAllUsers();
 	
 	int getOsbbIdByUser(User user);
+	List<User> getUsersByOsbb(int osbbId);
 
 }
 

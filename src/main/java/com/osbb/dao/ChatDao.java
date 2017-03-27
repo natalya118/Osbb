@@ -14,7 +14,13 @@ public interface ChatDao {
 
 	void deleteById(int id);
 
+	List<User> getChatUsers(int id);
 	List<Chat> findUserChats(int userid);
 	
 	List<Message> getChatMessages(int chatid);
+	
+	void addUserToChat(int chatId, int userId);
+	//void updateChat
+	
+	
 }

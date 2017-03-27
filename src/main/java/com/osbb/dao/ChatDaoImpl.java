@@ -19,7 +19,11 @@ import com.osbb.model.chats.Message;
 public class ChatDaoImpl extends AbstractDao<Integer, Chat> implements ChatDao{
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+	UserDao userDao;
 	
+	@Autowired
+	UserChatDao userChatDao;
 	@Override
 	public Chat findById(Integer id) {
 		Chat chat = getByKey(id);
@@ -64,6 +68,28 @@ public class ChatDaoImpl extends AbstractDao<Integer, Chat> implements ChatDao{
 //		Session session = sessionFactory.getCurrentSession();
 //	    List<Message> mess = (List<Message>) session.createQuery("from Message m where m.chatId = :chat_id").setParameter("chat_id", chatid).list();
 	    return mess;
+	}
+
+
+	@Override
+	public List<User> getChatUsers(int id) {
+		Session session = sessionFactory.getCurrentSession();
+	    String hql = "SELECT userId from UserChat WHERE chatId ="+id;
+	    Query query = session.createQuery(hql);
+	    List<Integer> userids = (List<Integer>)query.list();
+		List<User> chatusers = new ArrayList<User>();
+		for(Integer uid: userids){
+			chatusers.add(userDao.findById(uid));
+		}
+		return chatusers;
+	}
+
+
+	@Override
+	public void addUserToChat(int chatId, int userId) {
+		userChatDao.saveUserChat(chatId, userId);
+	    //List<Integer> userids = (List<Integer>)query.list();
+		
 	}
 
 }

@@ -73,6 +73,12 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 
+	@Override
+	public List<User> findAllUsers(int osbbId) {
+		
+		return dao.getUsersByOsbb(osbbId);
+	}
+
 
 	
 }
