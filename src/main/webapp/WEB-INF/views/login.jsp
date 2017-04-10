@@ -8,7 +8,7 @@
 <title>Login page</title>
 <link href="<c:url value='/static/css/bootstrap.css' />"
 	rel="stylesheet"></link>
-<link href="<c:url value='/static/resources/style.css' />"
+<link href="<c:url value='/static/resources/css/style.css' />"
 	rel="stylesheet" />
 </head>
 
@@ -45,7 +45,7 @@
 				value="Увійти">
 		</div>
 	</form>
-		<img
-			src="<c:url value='/static/houses.png'/>" />
+		<!-- <img 
+			src="<c:url value='/static/houses.png'/>" />-->
 </body>
 </html>

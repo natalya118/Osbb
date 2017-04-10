@@ -13,6 +13,6 @@ public interface RealtyService {
 	
 	void deleteRealtyById(int id);
 	
-	List<Realty> getAllRealtiesByHouseId(String houseId);
+	List<Realty> getAllRealtiesByHouseId(int houseId);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.osbb.model.House;
 import com.osbb.model.Osbb;
+import com.osbb.model.Realty;
 import com.osbb.model.User;
 @Repository("houseDao")
 public class HouseDaoImpl extends AbstractDao<Integer, House> implements HouseDao{
@@ -54,6 +55,7 @@ public class HouseDaoImpl extends AbstractDao<Integer, House> implements HouseDa
 		delete(house);
 		
 	}
+
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.osbb.dao.HouseDao;
 import com.osbb.dao.UserDao;
 import com.osbb.model.House;
+import com.osbb.model.Realty;
 import com.osbb.model.User;
 
 
@@ -69,6 +70,7 @@ public class HouseServiceImpl implements HouseService{
 		}
 		
 	}
+
 }
 
 class RandomString {

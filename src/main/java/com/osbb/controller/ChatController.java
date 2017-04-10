@@ -105,36 +105,18 @@ public class ChatController {
 //
 //		return "chats";
 //	}
+	
 	@RequestMapping(value = { "/newchat" }, method = RequestMethod.POST)
 	public String newChat(@Valid Chat_Users chat_users, BindingResult result, ModelMap model) {
 
-		
-		
-
-		//Chat chat = chat_users.getChat();
-		//for
-//		User newUser = osbb_creator.getCreator();
-//		newUser.setOsbbId(osbb.getId());
-//		userService.saveUser(newUser);
-		System.out.println("-----------------------------------------------------------");
 		Chat chat = new Chat();
 		chat.setTopic(chat_users.getNewChatTopic());
 		chat.setOsbbId(userService.findBySSO(getPrincipal()).getOsbbId());
 		chatService.saveChat(chat);
-		System.out.println("-------------------------------------------------------------------------");
-
-		System.out.println("-------------------------------------------------------------------------");
-
-		System.out.println(chat.getId());
 		String[] items = chat_users.getUstr().replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 		for (int i = 0; i < items.length; i++) {
 			chatService.addUserToChat(chat.getId(), userService.findBySSO(items[i]).getId());
-			
-			
 		}
-
-		System.out.println(chat_users.getUstr());
-		System.out.println(chat_users.getNewChatTopic());
 		List<Chat> chats = chatService.getAllChats(userService.findBySSO(getPrincipal()).getId());
 		model.addAttribute("chats", chats);
 		model.addAttribute("chat_users", new Chat_Users());

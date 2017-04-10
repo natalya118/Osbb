@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -36,9 +37,9 @@ public class House implements Serializable{
 	@Column(name="number", nullable=false)
 	private String number;
 
-	@NotEmpty
+	@NotNull
 	@Column
-	private int osbbid;
+	private Integer osbbid;
 	
 	public int getId() {
 		return id;
@@ -50,12 +51,12 @@ public class House implements Serializable{
 	}
 
 
-	public int getOsbbid() {
+	public Integer getOsbbid() {
 		return osbbid;
 	}
 
 
-	public void setOsbbid(int osbbid) {
+	public void setOsbbid(Integer osbbid) {
 		this.osbbid = osbbid;
 	}
 

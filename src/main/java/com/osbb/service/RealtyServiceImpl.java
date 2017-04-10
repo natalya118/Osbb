@@ -33,14 +33,13 @@ public class RealtyServiceImpl implements RealtyService {
 
 	@Override
 	public void deleteRealtyById(int id) {
-		// TODO Auto-generated method stub
+		realtyDao.deleteById(id);
 		
 	}
 
 	@Override
-	public List<Realty> getAllRealtiesByHouseId(String houseId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Realty> getAllRealtiesByHouseId(int houseId) {
+		return realtyDao.getHouseRealties(houseId);
 	}
 
 }

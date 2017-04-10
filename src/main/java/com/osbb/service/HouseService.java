@@ -3,6 +3,7 @@ package com.osbb.service;
 import java.util.List;
 
 import com.osbb.model.House;
+import com.osbb.model.Realty;
 
 public interface HouseService {
 
@@ -15,6 +16,7 @@ public interface HouseService {
 	void deleteHouse(int id);
 	
 	List<House> getAllHouses(int osbbId);
+	
 	
 	void generateUsersCredentials(List<Integer> flats, int houseId);
 }
