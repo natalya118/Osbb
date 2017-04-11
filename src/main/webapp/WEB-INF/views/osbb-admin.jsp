@@ -33,7 +33,8 @@
 <link
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
-
+<link href="<c:url value='/static/resources/css/news.css' />"
+	rel="stylesheet" />
 <link href="<c:url value='/static/resources/style.css' />"
 	rel="stylesheet" />
 <link href="<c:url value='/static/resources/css/chat.css' />"
@@ -86,9 +87,10 @@
 					<div class="home">
 						<div class="address">
 							<span class="address2" data-toggle="collapse"
-								data-target="#table">${house.street}, ${house.number}</span> <span
-								class="pdf" data-toggle="modal" data-target="#pdf-modal">pdf</span>
-							<span class="config pe-7s-config" data-toggle="modal"
+								data-target="#table${house.id}">${house.street},
+								${house.number}</span> <span class="pdf" data-toggle="modal"
+								data-target="#pdf-modal">pdf</span> <span
+								class="config pe-7s-config" data-toggle="modal"
 								data-target="#config-home-modal"></span>
 						</div>
 
@@ -99,44 +101,26 @@
 										<th>Ім'я</th>
 										<th>Прізвище</th>
 										<th>№ квартири</th>
-										<th>Телефон</th>
 										<th>e-mail</th>
 										<th>Логін</th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-
-									<tr>
-										<td class="name">Котя</td>
-										<td class="lastname">Глибовец</td>
-										<td class="apartment">666</td>
-										<td class="phone">949-54-45</td>
-										<td class="email">kglybovets@gmail.com</td>
-										<td class="login">glybovets</td>
-										<td data-toggle="modal" data-target="#delete-modal"
-											class="delete"><button type="button" class="close"
-												data-dismiss="modal">&times;</button></td>
-									</tr>
-									<tr>
-										<td class="name"></td>
-										<td class="lastname"></td>
-										<td class="apartment">667</td>
-										<td class="phone"></td>
-										<td class="email"></td>
-										<td class="login"></td>
-										<td class="delete"></td>
-									</tr>
-									<tr>
-										<td class="name"></td>
-										<td class="lastname"></td>
-										<td class="apartment">668</td>
-										<td class="phone"></td>
-										<td class="email"></td>
-										<td class="login"></td>
-										<td class="delete"></td>
-									</tr>
-
+									<c:forEach items="${house.realties}" var="realty">
+										<tr>
+											<td class="name">${realty.owner.firstName}</td>
+											<td class="lastname">${realty.owner.lastName}</td>
+											<td class="apartment">${realty.realtyNumber}</td>
+											<td class="email">${realty.owner.email}</td>
+											<td class="login">${realty.owner.ssoId}</td>
+											<td data-toggle="modal" data-target="#delete-modal"
+												class="delete"><button type="button" class="close"
+													data-dismiss="modal">&times;</button></td>
+										</tr>
+										
+										</c:forEach>
+										
 								</tbody>
 							</table>
 						</div>
@@ -168,8 +152,8 @@
 							class="new-home-input" />
 						<form:input path="number" type="text" placeholder="Номер"
 							class="new-home-input" />
-						<form:input path="flatsFrom" type="text" placeholder="Квартири від"
-							class="new-home-input half-input" />
+						<form:input path="flatsFrom" type="text"
+							placeholder="Квартири від" class="new-home-input half-input" />
 						<form:input path="flatsTo" type="text" placeholder="до"
 							class="new-home-input half-input" />
 					</div>

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -29,25 +30,27 @@ public class User implements Serializable {
 	private Integer id;
 
 	@NotEmpty
-	@Column(name = "sso_id", unique = true, nullable = false)
+	@Column(name = "sso_id", unique = true)
 	private String ssoId;
 
 	@NotEmpty
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 
-	@NotEmpty
-	@Column(name = "first_name", nullable = false)
+	
+	@Column(name = "first_name")
 	private String firstName;
 
-	@NotEmpty
-	@Column(name = "last_name", nullable = false)
+	
+	@Column(name = "last_name")
 	private String lastName;
 
-	@NotEmpty
+	
 	@Email
-	@Column(name = "email", nullable = false)
+	@Column(name = "email")
 	private String email;
+	
+
 
 	// @Column(name="phone")
 	// private String phone;
@@ -57,11 +60,26 @@ public class User implements Serializable {
 	// @Column(name="is_email_confirmed")
 	// @NotEmpty
 	// private Boolean isEmailConfirmed;
+	
+	
+
+	@OneToOne(mappedBy = "owner")
+	private Realty realty;
 	//
+	
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "APP_USER_USER_PROFILE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles;
+
+	public Realty getRealty() {
+		return realty;
+	}
+
+	public void setRealty(Realty realty) {
+		this.realty = realty;
+	}
 
 	public Integer getId() {
 		return id;

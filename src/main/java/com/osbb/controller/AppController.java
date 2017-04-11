@@ -52,7 +52,7 @@ import com.osbb.service.UserService;
 import com.osbb.wrap.Osbb_Creator;
 
 
-
+//hibernate.show_sql = true
 
 @Controller
 @RequestMapping("/")

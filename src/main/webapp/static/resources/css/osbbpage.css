@@ -478,3 +478,7 @@ width:25px;
 .half-input{
     width: 46%;
 }
+.container{
+	min-height: 100%;
+	height: inherit;
+}

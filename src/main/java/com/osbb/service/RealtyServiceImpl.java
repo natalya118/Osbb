@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.osbb.dao.OsbbDao;
 import com.osbb.dao.RealtyDao;
 import com.osbb.model.Realty;
 
 @Service("realtyService")
+@Transactional
 public class RealtyServiceImpl implements RealtyService {
 
 	@Autowired

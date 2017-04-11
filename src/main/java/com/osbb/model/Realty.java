@@ -4,66 +4,82 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="realties")
-public class Realty {
-	
+@Table(name = "realties")
+public class Realty implements Comparable {
+
 	@Id
-	@Column(name="realty_id")
-	private String realtyId;
-	
+	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
 	@NotNull
-	@Column(name="realty_house_id")
-	private String realtyHouseId;
-	
+	@Column
+	private int realtyOwnerId;
+
 	@NotNull
-	@Column(name="realty_owner_id")
-	private String realtyOwnerId;
-	
-	@NotNull
-	@Column(name="realty_number_or_desc", length=40)
-	private String realtyNumberOrDesc;
-	
+	@Column
+	private int realtyNumber;
+
 	@ManyToOne
-	@JoinColumn(name="house_id")
+	@JoinColumn(name = "house_id")
 	private House house;
 
-	public String getRealtyId() {
-		return realtyId;
+	@OneToOne
+	@JoinColumn(name = "owner_id")
+	private User owner;
+
+	public User getOwner() {
+		return owner;
 	}
 
-	public void setRealtyId(String realtyId) {
-		this.realtyId = realtyId;
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
-	public String getRealtyHouseId() {
-		return realtyHouseId;
+	public int getId() {
+		return id;
 	}
 
-	public void setRealtyHouseId(String realtyHouseId) {
-		this.realtyHouseId = realtyHouseId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getRealtyOwnerId() {
+	public int getRealtyOwnerId() {
 		return realtyOwnerId;
 	}
 
-	public void setRealtyOwnerId(String realtyOwnerId) {
+	public void setRealtyOwnerId(int realtyOwnerId) {
 		this.realtyOwnerId = realtyOwnerId;
 	}
 
-	public String getRealtyNumberOrDesc() {
-		return realtyNumberOrDesc;
+	public int getRealtyNumber() {
+		return realtyNumber;
 	}
 
-	public void setRealtyNumberOrDesc(String realtyNumberOrDesc) {
-		this.realtyNumberOrDesc = realtyNumberOrDesc;
+	public void setRealtyNumber(int realtyNumber) {
+		this.realtyNumber = realtyNumber;
+	}
+
+	public House getHouse() {
+		return house;
+	}
+
+	public void setHouse(House house) {
+		this.house = house;
 	}
 
 	@Override
 	public String toString() {
-		return "Realty [realtyId=" + realtyId + ", realtyHouseId=" + realtyHouseId + ", realtyOwnerId=" + realtyOwnerId
-				+ ", realtyNumberOrDesc=" + realtyNumberOrDesc + "]";
+		return "Realty [d=" + id + ", realtyOwnerId=" + realtyOwnerId + ", realtyNumber=" + realtyNumber + ", house="
+				+ house + "]";
 	}
-	
-	
+
+	@Override
+	public int compareTo(Object r2) {
+		if (this.getId() > ((Realty) r2).getId())
+			return 1;
+		else
+			return 0;
+	}
+
 }

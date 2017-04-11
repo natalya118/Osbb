@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -39,8 +40,8 @@ public class RealtyDaoImpl extends AbstractDao<Integer, Realty> implements Realt
 
 	@Override
 	public List<Realty> getHouseRealties(int houseId) {
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("house_id", houseId));
+		Criteria crit = createEntityCriteria().setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).add(Restrictions.eq("house_id", houseId)).addOrder(Order.asc("id"));
+		
 		return crit.list();
 	}
 

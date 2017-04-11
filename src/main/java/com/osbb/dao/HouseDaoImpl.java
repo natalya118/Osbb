@@ -3,6 +3,7 @@ package com.osbb.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -41,7 +42,7 @@ public class HouseDaoImpl extends AbstractDao<Integer, House> implements HouseDa
 
 
 	public List<House> findAllHousesByOsbbId(int osbbId) {
-		Criteria crit = createEntityCriteria();
+		Criteria crit = createEntityCriteria().setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).addOrder(Order.asc("id"));
 		crit.add(Restrictions.eq("osbbid", osbbId));
 		return crit.list();
 	}
