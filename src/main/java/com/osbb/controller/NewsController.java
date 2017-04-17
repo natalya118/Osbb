@@ -82,7 +82,7 @@ public class NewsController {
 		System.out.println("------------------------------------------------------------");
 		System.out.println("HERE---------------------------------------");
 		newsService.deleteNews(Integer.parseInt(id));
-		return "test";
+		return "redirect:/news/all";
 	}
 
 

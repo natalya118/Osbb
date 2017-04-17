@@ -44,6 +44,19 @@ public class House implements Serializable{
 	@Column
 	private Integer osbbid;
 	
+	private int numberOfFlats;
+	
+	
+	public int getNumberOfFlats() {
+		return numberOfFlats;
+	}
+
+
+	public void setNumberOfFlats(int numberOfFlats) {
+		this.numberOfFlats = numberOfFlats;
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -67,6 +80,8 @@ public class House implements Serializable{
 	public Set<Realty> getRealties() {
 		return realties;
 	}
+	
+	
 
 
 	public void setRealties(Set<Realty> realties) {
@@ -79,14 +94,6 @@ public class House implements Serializable{
 	private Set<Realty> realties;
 
 
-	public int getHouseId() {
-		return id;
-	}
-
-
-	public void setHouseId(int houseId) {
-		id = houseId;
-	}
 
 
 

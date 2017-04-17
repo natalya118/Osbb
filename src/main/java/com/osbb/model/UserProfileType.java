@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public enum UserProfileType implements Serializable{
 	USER("USER"),
-	USERCOMPANY("USERCOMPANY"),
 	ADMIN("ADMIN");
 	
 	String userProfileType;

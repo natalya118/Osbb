@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 
 <head>
@@ -62,10 +63,12 @@
 		<%@include file="left_menu.jsp"%>
 		<div class="container clearfix">
 			<div class="osbb-news-list" id="osbb-news-list">
+			<sec:authorize access="hasRole('ADMIN')">
 				<button class="new-news" data-toggle="modal"
 					data-target="#new-news-modal">
 					<i class="fa fa-plus"></i><span>Додати новину</span>
 				</button>
+				</sec:authorize>
 				<div class="search">
 					<input type="text" placeholder="search" /> <i class="fa fa-search"></i>
 				</div>
@@ -133,7 +136,7 @@
 					<div class="modal-footer">
 
 						<div class="form-actions">
-							<input type="submit" class="yes-btn" data-dismiss="modal"
+							<input type="submit" class="yes-btn" 
 								value="Так">
 						</div>
 						<button type="button" class="no-btn" data-dismiss="modal">Ні</button>

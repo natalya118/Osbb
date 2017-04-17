@@ -36,7 +36,7 @@ public class HouseServiceImpl implements HouseService{
 
 	@Override
 	public void updateHouse(House house) {
-		House entity = dao.findById(house.getHouseId());
+		House entity = dao.findById(house.getId());
 		if(entity!=null){
 			entity.setStreet(house.getStreet());
 			entity.setNumber(house.getNumber());
@@ -53,7 +53,11 @@ public class HouseServiceImpl implements HouseService{
 	@Override
 	public List<House> getAllHouses(int osbbId) {
 
-		return dao.findAllHousesByOsbbId(osbbId);
+		List<House> res = dao.findAllHousesByOsbbId(osbbId);
+		for(House h:res){
+			h.setNumberOfFlats(dao.getNumberOfFlats(h.getId()));
+		}
+		return res;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.osbb.controller;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -146,6 +147,9 @@ public class AppController {
 
 			User newUser = osbb_creator.getCreator();
 			newUser.setOsbbId(osbb.getId());
+			Set<UserProfile> userProfiles = new HashSet<UserProfile>(); 
+			userProfiles.add(userProfileService.findById(1));
+			newUser.setUserProfiles(userProfiles);
 			userService.saveUser(newUser);
 			
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -253,7 +257,7 @@ public class AppController {
 		if (isCurrentAuthenticationAnonymous()) {
 			return "login";
 	    } else {
-	    	return "redirect:/list";  
+	    	return "redirect:/osbbadmin";  
 	    }
 	}
     @RequestMapping(

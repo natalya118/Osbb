@@ -18,6 +18,7 @@ public interface HouseDao {
 
 	List<House> findAllHousesByOsbbId(int osbbId);
 	
+	int getNumberOfFlats(int houseId);
 
 	
 

@@ -156,9 +156,9 @@ function getUsers(){
 												<i class="fa fa-circle online"></i> в мережі
 											</div>
 											<div class="toggles">
-												<input type="checkbox" name="checkbox1" id="checkbox1"
+												<input type="checkbox" name="checkbox${u.ssoId}" id="checkbox${u.ssoId}"
 													value="${u.ssoId}" class="ios-toggle" /> <label
-													for="checkbox1" class="checkbox-label"
+													for="checkbox${u.ssoId}" class="checkbox-label"
 													data-off="Додати до бесіди" data-on="Видалити з бесіди"></label>
 											</div>
 										</div>

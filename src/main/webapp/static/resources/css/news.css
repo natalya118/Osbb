@@ -1,4 +1,4 @@
-.new-news{
+.new-news, .new-poll{
     color: white;
     background-color: #86BB71;
     border:none;
@@ -8,7 +8,43 @@
     margin-left: -3%;
 }
 
-.new-news span{
+
+ul{
+    list-style: none;
+}
+
+#votedForThis ul li{
+    border-bottom: 1px solid #ddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    list-style: none;
+}
+
+#votedForThis ul li .name, #votedForThis ul li .status{
+    margin-left: 40px;
+}
+
+.showRes{
+    opacity: 0;
+    text-align: center;
+    background-color: #f0776c;
+    color: white;
+    font-size: 12px;
+    border-radius: 35px;
+    width: 100px;
+    margin-top: 5px;
+    height: 30px;
+    padding-top: 5px;
+}
+
+#votedForThis ul li .status{
+    color: #aaa
+} 
+#votedForThis ul{
+    height: 300px;
+    overflow-y: auto;
+}
+.new-news span, .new-poll span{
     margin-left: 25px;
     display: block;
     margin-top: -20px;
@@ -16,6 +52,117 @@
 
 .new-news i{
     margin-left: -90px;
+}
+
+
+.details.polli{
+    margin: 0 auto;
+}
+.details-cont{
+    text-align: center;
+}
+
+.details.polli{
+    width: 100%;
+}
+
+.about.poll .show-more{
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.first, .second{
+    width: 100px;
+    margin-right: 30px;
+}
+
+
+.ch-item {
+  width: 100%;
+  height: 100%;
+	border-radius: 50%;
+	position: relative;
+	cursor: default;
+	box-shadow: inset 0 0 0 16px rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.1);
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.ch-info {
+	position: absolute;
+	 background: -webkit-linear-gradient(#8cc7e0, #5bafd0); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#8cc7e0, #5bafd0); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#8cc7e0, #5bafd0); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#8cc7e0, #5bafd0); /* Standard syntax */
+	width: inherit;
+	height: inherit;
+	border-radius: 50%;
+	opacity: 0;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	-webkit-transform: scale();
+	-moz-transform: scale();
+	-ms-transform: scale();
+	-o-transform: scale();
+	transform: scale();
+	-webkit-backface-visibility: hidden;
+}
+
+.ch-info h6 {
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 12px;
+	margin: -3px 10px;
+	padding: 45px 0 0 0;
+	height: 140px;
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.ch-item:hover { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 1px 2px rgba(0,0,0,0.1) }
+
+.ch-item:hover .ch-info {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	   -moz-transform: scale(1);
+	    -ms-transform: scale(1);
+	     -o-transform: scale(1);
+	        transform: scale(1);
+}
+
+.ch-item:hover .ch-info p { opacity: 1 }
+
+
+.valperc{
+    display: none;
+    font-size: 40px;
+    margin-top: -58px;
+    margin-left: 20px;
+}
+
+.btn-poll{
+  width: 50px;
+    height: 50px;
+    background-color: #fefefe;
+    margin-bottom: -38px;
+    border-radius: 50%;
+}
+
+.answer{
+    width: 100px;
+    text-align: center;
+    margin-top: 45px;
+    font-size: 18px;
+}
+.new-poll i{
+   margin-left: -120px; 
 }
 
 .show-more{
@@ -60,6 +207,7 @@
   padding: 20px;
   height: 300px;
 }
+
 .osbb-news-list ul li{
     position: relative;
     padding-top: 20px;
@@ -67,7 +215,10 @@
     list-style: none;
     background-color: #eee;
   padding-bottom: 30px;
-  margin-bottom: 20px;
+}
+
+.osbb-news-list.pol ul li{
+    border-bottom: 2px solid #8cc7e0;
 }
 .osbb-news-list .about{
   float: left;
@@ -152,6 +303,20 @@ input, textarea {
   box-sizing: border-box;
 }
 
+.variant{
+    font: 13px/20px 'Helvetica', sans-serif;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5px;
+  padding: 0 20px 2px;
+  font-size: 16px;
+  background: white;
+  border: 2px solid #ebebeb;
+  border-radius: 35px;
+  -webkit-box-shadow: inset 0 -2px #ebebeb;
+  box-shadow: inset 0 -2px #ebebeb;
+}
+
 #new-news-input-title {
   font: 13px/20px 'Helvetica', sans-serif;
   width: 100%;
@@ -172,6 +337,24 @@ input, textarea {
   box-shadow: inset 0 -2px #62c2e4;
 }
 
+.delete-variant{
+    position: relative;
+    z-index: 100;
+    margin-top: -47px;
+}
+.add-variant{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 10px;
+    height: 40px;
+    padding: 0;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    background-color: #86BB71;
+}
+
 #new-news-input-text {
   font: 13px/20px 'Helvetica', sans-serif;
   width: 100%;
@@ -179,6 +362,7 @@ input, textarea {
   padding-left: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-bottom: 25px;
   font-size: 16px;
   background: white;
   border: 2px solid #ebebeb;

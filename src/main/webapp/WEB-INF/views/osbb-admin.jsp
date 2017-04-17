@@ -41,35 +41,36 @@
 	rel="stylesheet" />
 <link href="<c:url value='/static/resources/css/osbbpage.css' />"
 	rel="stylesheet" />
+	
+	<script type="text/javascript">
+	function setId(){
+		$(".to-reset").attr('id',  $(".set-reset").attr('id'));
+		
+		
+	}
+	
+function doAjax() {
+	urlto = '/osbb/reset/' + $(".to-reset").attr('id');
+	console.log(urlto);
+  $.ajax({
+    url: urlto,
+    type: 'GET',
+    success: function(data) {
+    	location.reload();
+    },
+  error: function(){}
+    
+  });
+  
+  location.reload();
+ }
+</script>
 </head>
 
 <body>
 	<%@include file="left_menu.jsp"%>
 	<div class="supreme-container">
-		<div id="snav" class="en">
-			<ul>
-				<li><a href="#"> <i class="pe pe-7s-user"></i> <span>Home</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-chat"></i> <span>Чат</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-light"></i> <span>Счетчики</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-cash"></i> <span>Счета</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-help1"></i> <span>Помощь</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-search"></i> <span>Поиск</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-search"></i> <span>Поиск</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-search"></i> <span>Поиск</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-search"></i> <span>Поиск</span>
-				</a></li>
-				<li><a href="#"> <i class="pe pe-7s-search"></i>
-				</a></li>
-			</ul>
-		</div>
+		
 		<div class="container clearfix">
 			<div class="osbb-cont">
 				<div class="img-cont">
@@ -78,9 +79,9 @@
 						class="osbb-pic">
 				</div>
 				<div class="information">
-					<h1 class="osbb-title">КотоОсбб</h1>
+					<h1 class="osbb-title">${osbb.name}</h1>
 					<div class="address">
-						<p class="address1">Київ, р-н Подільський</p>
+						<p class="address1">${osbb.city}</p>
 					</div>
 				</div>
 				<c:forEach items="${houses}" var="house">
@@ -88,7 +89,7 @@
 						<div class="address">
 							<span class="address2" data-toggle="collapse"
 								data-target="#table${house.id}">${house.street},
-								${house.number}</span> <span class="pdf" data-toggle="modal"
+								${house.number} (${house.numberOfFlats} квартир)</span> <span class="pdf" data-toggle="modal"
 								data-target="#pdf-modal">pdf</span> <span
 								class="config pe-7s-config" data-toggle="modal"
 								data-target="#config-home-modal"></span>
@@ -115,12 +116,12 @@
 											<td class="email">${realty.owner.email}</td>
 											<td class="login">${realty.owner.ssoId}</td>
 											<td data-toggle="modal" data-target="#delete-modal"
-												class="delete"><button type="button" class="close"
-													data-dismiss="modal">&times;</button></td>
+												class="delete" ><button type="button" class="close set-reset"
+													id="${realty.owner.id}" onClick="setId()">&times;</button></td>
 										</tr>
-										
-										</c:forEach>
-										
+
+									</c:forEach>
+
 								</tbody>
 							</table>
 						</div>
@@ -169,25 +170,29 @@
 	</div>
 
 	<div id="delete-modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Скинути користувача</h4>
-				</div>
-				<div class="modal-body">
-					Ви дійсно бажаєте скинути цього користувача?
-					<div class="tip">
-						<i class="fa fa-question"></i><span class="tip-text">Система
-							згенерує нові дані для входу</span>
+		
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Скинути користувача</h4>
+					</div>
+					<div class="modal-body">
+						Ви дійсно бажаєте скинути цього користувача?
+						<div class="tip">
+							<i class="fa fa-question"></i><span class="tip-text">Система
+								згенерує нові дані для входу</span>
+						</div>
+					</div>
+					<div class="modal-footer">
+					
+							<button type="submit" class="yes-btn to-reset" onClick="doAjax()">Так</button>
+						
+						<button type="button" class="no-btn" data-dismiss="modal">Ні</button>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="yes-btn" data-dismiss="modal">Так</button>
-					<button type="button" class="no-btn" data-dismiss="modal">Ні</button>
-				</div>
 			</div>
-		</div>
+		
 	</div>
 
 	<div id="config-home-modal" class="modal fade" role="dialog">

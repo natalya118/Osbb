@@ -6,7 +6,7 @@ import com.osbb.model.User;
 
 public interface UserService {
 	
-	User findById(String id);
+	User findById(int id);
 	
 	User findBySSO(String sso);
 	
