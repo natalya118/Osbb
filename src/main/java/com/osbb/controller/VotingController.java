@@ -79,7 +79,7 @@ public class VotingController {
 	public String listVotings(ModelMap model) {
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("newVoting", new NewVoting());
-		votingService.completelyLiked(1);
+		votingService.completelyLiked(2);
 		List<Voting> allVotings = votingService.getAllVotingsByOsbbId(userService.findBySSO(getPrincipal()).getOsbbId());
 		for(Voting v: allVotings){
 			v.setVoted(votingService.voted(userService.findBySSO(getPrincipal()).getId(), v.getId()));
