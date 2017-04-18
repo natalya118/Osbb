@@ -69,10 +69,7 @@ public class HouseDaoImpl extends AbstractDao<Integer, House> implements HouseDa
 
 	public int getNumberOfFlats(int houseId){
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("SELECT COUNT(*) FROM House h "
-						+ "INNER JOIN h.realties r  "
-						+ "WHERE r.house.id = "+ houseId
-						+ " GROUP BY h.id");
+				.createQuery("SELECT COUNT(*) FROM House h INNER JOIN h.realties r  WHERE r.house.id = "+ houseId+ " GROUP BY h.id");
 
 		int count = (int) (long)query.uniqueResult();
 		return count;

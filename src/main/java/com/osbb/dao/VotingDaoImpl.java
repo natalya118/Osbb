@@ -64,8 +64,7 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 
 	public boolean voted(int userId, int votingId) {
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("SELECT COUNT(*) FROM Voting voting " + "INNER JOIN voting.variants variant  "
-						+ "INNER JOIN variant.votes vote  " + "WHERE vote.userId = " + userId + " AND voting.id = "
+				.createQuery("SELECT COUNT(*) FROM Voting voting " + "INNER JOIN voting.variants variant INNER JOIN variant.votes vote  " + "WHERE vote.userId = " + userId + " AND voting.id = "
 						+ votingId + " GROUP BY userId");
 		try {
 			int count = (int) (long) query.uniqueResult();
@@ -78,8 +77,7 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 	}
 
 	public void completelyLiked(int osbbId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("SELECT variant.id FROM Variant variant "
-				+ "WHERE NOT EXISTS (SELECT u.id FROM User u WHERE u.osbbId = " + osbbId
+		Query query = sessionFactory.getCurrentSession().createQuery("SELECT variant.id FROM Variant variant WHERE NOT EXISTS (SELECT u.id FROM User u WHERE u.osbbId = " + osbbId
 				+ " AND NOT EXISTS (SELECT vote.userId FROM Vote vote WHERE vote.userId = u.id AND vote.variant.id = variant.id))");
 		List count = query.list();
 		System.out.println("-----------------------------------------------------------------LIKED------");
@@ -89,7 +87,8 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 
 	public int numberOfVotedUsers(int votingId) {
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("SELECT COUNT(*) FROM Voting voting " + "INNER JOIN voting.variants variant  "
+				.createQuery("SELECT COUNT(*) FROM Voting voting "
+						+ "INNER JOIN voting.variants variant "
 						+ "INNER JOIN variant.votes vote  " + "WHERE voting.id = " + votingId + " GROUP BY voting.id");
 		try {
 			int count = (int) (long) query.uniqueResult();
@@ -101,9 +100,9 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 
 	public int numberOfVotedForVariant(int variantId) {
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("SELECT COUNT(*) FROM Voting voting " + "INNER JOIN voting.variants variant  "
-						+ "INNER JOIN variant.votes vote  " + "WHERE vote.variant.id = " + variantId
-						+ " GROUP BY userId");
+				.createQuery("SELECT COUNT(*) FROM Voting voting "
+						+ "INNER JOIN voting.variants variant INNER JOIN variant.votes vote  " 
+						+ "WHERE vote.variant.id = " + variantId + " GROUP BY userId");
 		try {
 			int count = (int) (long) query.uniqueResult();
 			return count;

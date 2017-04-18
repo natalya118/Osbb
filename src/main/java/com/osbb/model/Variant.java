@@ -2,6 +2,7 @@ package com.osbb.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +34,7 @@ public class Variant implements Comparable {
 	@JoinColumn(name = "voting_id")
 	private Voting voting;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "variant")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "variant", cascade = CascadeType.REMOVE)
 	private Set<Vote> votes; 
 	@Transient
 	private double percent;

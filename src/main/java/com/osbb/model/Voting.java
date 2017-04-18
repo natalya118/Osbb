@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +41,7 @@ public class Voting {
 	@Column
 	private boolean isOpenNow;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "voting")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "voting", cascade = CascadeType.REMOVE)
 	private Set<Variant> variants; 
 	
 	private boolean voted;

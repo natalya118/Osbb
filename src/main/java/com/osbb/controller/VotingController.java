@@ -152,7 +152,7 @@ public class VotingController {
 	}
 	
 	@RequestMapping(value = { "/vote/{id}" }, method = RequestMethod.GET)
-	public String deleteNews(@PathVariable String id){
+	public String vote(@PathVariable String id){
 		System.out.println("------------------------------------------------------------");
 		System.out.println("HERE---------------------------------------");
 		Vote vote = new Vote();
@@ -160,6 +160,11 @@ public class VotingController {
 		Variant var = variantService.getVariantById(Integer.parseInt(id));
 		vote.setVariant(var);
 		voteService.saveVote(vote);
+		return "redirect:/votings/all";
+	}
+	@RequestMapping(value = { "remove/{id}" }, method = RequestMethod.GET)
+	public String removeVoting(@PathVariable String id){
+		votingService.deleteVoting(Integer.parseInt(id));
 		return "redirect:/votings/all";
 	}
 

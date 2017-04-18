@@ -79,8 +79,10 @@
 				<ul class="news-list">
 					<c:forEach items="${allvotings}" var="v">
 						<li class="clearfix polling">
-							<button type="button" class="close" data-toggle="modal"
-								data-target="#delete-modal">&times;</button>
+						<sec:authorize access="hasRole('ADMIN')">
+							<a href="<c:url value='/votings/remove/${v.id}' />"><button type="button" class="close" data-toggle="modal"
+								>&times;</button></a>
+								</sec:authorize>
 							<div class="about poll">
 								<div class="name">${v.topic}</div>
 								<div class="poll-info">
