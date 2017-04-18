@@ -12,10 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
+@Transactional
 public class Variant implements Comparable {
 	@Id
 	@Column
@@ -32,6 +35,24 @@ public class Variant implements Comparable {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "variant")
 	private Set<Vote> votes; 
+	@Transient
+	private double percent;
+
+	public Set<Vote> getVotes() {
+		return votes;
+	}
+
+	public void setVotes(Set<Vote> votes) {
+		this.votes = votes;
+	}
+
+	public double getPercent() {
+		return percent;
+	}
+
+	public void setPercent(double percent) {
+		this.percent = percent;
+	}
 
 	public int getId() {
 		return id;
@@ -57,9 +78,12 @@ public class Variant implements Comparable {
 		this.voting = voting;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Variant [id=" + id + ", variant=" + variant + ", voting=" + voting + "]";
+		return "Variant [id=" + id + ", variant=" + variant + ", voting=" + voting + ", votes=" + votes + ", percent="
+				+ percent + "]";
 	}
 
 	@Override

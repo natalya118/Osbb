@@ -1,14 +1,50 @@
-
+function doAjax() {
+	urlto = '/osbb/votings/vote/' + $(".btn-poll").attr('id');
+	console.log(urlto);
+  $.ajax({
+    url: urlto,
+    type: 'POST',
+    success: function(data) {
+    	location.reload();
+    },
+  error: function(){}
+    
+  });
+}
 $(document).ready(function(){
+	$('body').on('DOMNodeInserted', 'select', function () {
+	      alert('select loaded'); 
+	});
     var voted = false;
     var childCount = $(".details").children().length;
     var aboutLen = $(".polling").width();
     var detLen = $(".details").width();
         $(".details").css("margin-left", ""+((aboutLen-detLen)/2)-50+"px");
-    
+        console.log("dfskfsffs");
+        $(".admin").click(function(){
+        	$('.new-list').each(function() {
+                var percent = $(".percent").attr('id')/100;
+                console.log(percent);
+                //voted = true;
+                $(".btn-poll").remove();
+                $(".valperc").show().fadeIn();
+                $('.first').circleProgress({
+                    value: percent,
+                    fill: {
+                        gradient: ['#9cc7e0', '#5bafd0']
+                    },
+                });
+        	});
+
+        });
+        
+        $(".admin").click();
+        
+        
     
     $(".btn-poll").click(function(){
-        voted = true;
+    
+        //voted = true;
         $(".btn-poll").remove();
         $(".valperc").show().fadeIn();
         $('.first').circleProgress({

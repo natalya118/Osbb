@@ -57,4 +57,18 @@ public class VotingServiceImpl implements VotingService{
 		return votingDao.voted(userId, votingId);
 	}
 
+	@Override
+	public void completelyLiked(int osbbId) {
+		votingDao.completelyLiked(osbbId);
+		
+	}
+	
+	public int numberOfVotedUsers(int votingId){
+		return votingDao.numberOfVotedUsers(votingId);
+	}
+	
+	public double countPercent(Variant v){
+		return votingDao.countPercent(v);
+	}
+
 }

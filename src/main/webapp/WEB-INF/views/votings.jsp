@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 
 <head>
@@ -90,23 +91,35 @@
 										data-target="#more-news${v.id}">Детальніше</button>
 								</div>
 								<div class="details polli">
+								<sec:authorize access="hasRole('USER')">
 
 									<c:if test="${! v.voted}">
 										<c:forEach items="${v.variants}" var="var">
 											<div class="col-sm-2 col-xs-6 col-lg-2 col-md-2 first">
-												<div class="ch-item ch-img-1 btn-poll">
+												<div class="ch-item ch-img-1 btn-poll" id="${var.id}" >
 													<div class="ch-info">
-														<h1 style="font-size:100px; text-align: center;"><i class="pe pe-7s-like"></i></h1>
+														<h1 style="font-size:40px; text-align: center;"><i class="pe pe-7s-like"></i></h1>
 														
 
 													</div>
 													</div>
-													<div class="answer">${var.variant}</div>
+													<div class="answer"><a href="<c:url value='/votings/vote/${var.id}' />">${var.variant}</a></div>
 												
 
 											</div>
 										</c:forEach>
 									</c:if>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ADMIN')">
+									<c:forEach items="${v.variants}" var="var">
+											<div class="col-sm-2 col-xs-6 col-lg-2 col-md-2 first" id="${var.id}">
+			
+													<div class="answer">${var.variant}: <h2>${var.percent}</h2></div>
+												
+
+											</div>
+										</c:forEach>
+									</sec:authorize>
 
 								</div>
 							</div>
@@ -115,7 +128,6 @@
 				</ul>
 			</div>
 		</div>
-		<img id="back" src="111.png">
 	</div>
 	<div id="new-news-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -143,7 +155,7 @@
 							<form:input path="v5" type="text" placeholder="Варіант №5"
 								class="variant" />
 						</div>
-						<button type="button" class="add-variant">Додати варіант</button>
+						
 						<div class="modal-footer">
 							<div class="form-actions">
 								<input type="submit" class="add-news-btn" value="Додати" />

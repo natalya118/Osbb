@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.osbb.model.News;
 import com.osbb.model.Realty;
 import com.osbb.model.Variant;
+import com.osbb.model.Vote;
 import com.osbb.model.Voting;
 import com.osbb.model.chats.Chat;
 import com.osbb.service.ChatService;
@@ -34,6 +35,8 @@ import com.osbb.service.MessageService;
 import com.osbb.service.NewsService;
 import com.osbb.service.UserProfileService;
 import com.osbb.service.UserService;
+import com.osbb.service.VariantService;
+import com.osbb.service.VoteService;
 import com.osbb.service.VotingService;
 import com.osbb.wrap.Chat_Users;
 import com.osbb.wrap.NewVoting;
@@ -54,6 +57,12 @@ public class VotingController {
 	@Autowired
 	VotingService votingService;
 	
+	@Autowired
+	VariantService variantService;
+	
+	@Autowired
+	VoteService voteService;
+	
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -70,12 +79,17 @@ public class VotingController {
 	public String listVotings(ModelMap model) {
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("newVoting", new NewVoting());
+		votingService.completelyLiked(2);
 		List<Voting> allVotings = votingService.getAllVotingsByOsbbId(userService.findBySSO(getPrincipal()).getOsbbId());
 		for(Voting v: allVotings){
 			v.setVoted(votingService.voted(userService.findBySSO(getPrincipal()).getId(), v.getId()));
-			
-			System.out.println("HERE_______" + v.getId());
+			for(Variant var: v.getVariants()){
+				var.setPercent(votingService.countPercent(var));
+		
+			}
 		}
+				//System.out.println(votingService.numberOfVotedUsers(2));
+	
 		model.addAttribute("allvotings", allVotings);
 		return "votings";
 	}
@@ -137,12 +151,16 @@ public class VotingController {
 		return "redirect:/votings/all";
 	}
 	
-	@RequestMapping(value = { "/delnews/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/vote/{id}" }, method = RequestMethod.GET)
 	public String deleteNews(@PathVariable String id){
 		System.out.println("------------------------------------------------------------");
 		System.out.println("HERE---------------------------------------");
-		//newsService.deleteNews(Integer.parseInt(id));
-		return "redirect:/news/all";
+		Vote vote = new Vote();
+		vote.setUserId(userService.findBySSO(getPrincipal()).getId());
+		Variant var = variantService.getVariantById(Integer.parseInt(id));
+		vote.setVariant(var);
+		voteService.saveVote(vote);
+		return "redirect:/votings/all";
 	}
 
 

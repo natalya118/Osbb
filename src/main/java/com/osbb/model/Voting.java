@@ -12,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
+@Transactional
 public class Voting {
 	@Id
 	@Column

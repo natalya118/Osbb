@@ -30,4 +30,13 @@ public class VariantDaoImpl extends AbstractDao<Integer, Variant> implements Var
 		return null;
 	}
 
+	@Override
+	public Variant getVariantById(int id) {
+		Variant variant = getByKey(id);
+		if (variant != null) {
+			Hibernate.initialize(variant);
+		}
+		return variant;
+	}
+
 }

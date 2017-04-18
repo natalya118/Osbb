@@ -25,7 +25,7 @@ public class VoteDaoImpl extends AbstractDao<Integer, Vote> implements VoteDao {
 
 	@Override
 	public void save(Vote vote) {
-		persist(vote);
+		merge(vote);
 		
 	}
 

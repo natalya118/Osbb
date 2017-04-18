@@ -7,10 +7,12 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 @Entity
 @Table
 @IdClass(VoteId.class)
+@Transactional
 public class Vote {
 	@Id
 	private int userId;
