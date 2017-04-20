@@ -84,6 +84,9 @@ public class VotingController {
 		for(Voting v: allVotings){
 			v.setVoted(votingService.voted(userService.findBySSO(getPrincipal()).getId(), v.getId()));
 			for(Variant var: v.getVariants()){
+				System.out.println("-------------------------------");
+				System.out.println(var.getId());
+				System.out.println(votingService.countPercent(var));
 				var.setPercent(votingService.countPercent(var));
 		
 			}

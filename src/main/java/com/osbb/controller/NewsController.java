@@ -77,7 +77,7 @@ public class NewsController {
 		return "redirect:/news/all";
 	}
 	
-	@RequestMapping(value = { "/delnews/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/remove/{id}" }, method = RequestMethod.GET)
 	public String deleteNews(@PathVariable String id){
 		System.out.println("------------------------------------------------------------");
 		System.out.println("HERE---------------------------------------");

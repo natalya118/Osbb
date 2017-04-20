@@ -159,7 +159,7 @@ function getUsers(){
 												<input type="checkbox" name="checkbox${u.ssoId}" id="checkbox${u.ssoId}"
 													value="${u.ssoId}" class="ios-toggle" /> <label
 													for="checkbox${u.ssoId}" class="checkbox-label"
-													data-off="Додати до бесіди" data-on="Видалити з бесіди"></label>
+													data-off="Видалити з бесіди" data-on="Додати до бесіди"></label>
 											</div>
 										</div>
 									</li>

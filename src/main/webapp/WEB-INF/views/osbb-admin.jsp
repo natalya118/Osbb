@@ -92,7 +92,7 @@ function doAjax() {
 								${house.number} (${house.numberOfFlats} квартир)</span> <span class="pdf" data-toggle="modal"
 								data-target="#pdf-modal">pdf</span> <span
 								class="config pe-7s-config" data-toggle="modal"
-								data-target="#config-home-modal"></span>
+								data-target=".config-home-modal"></span>
 						</div>
 
 						<div class="table collapse" id="table${house.id}">
@@ -127,6 +127,7 @@ function doAjax() {
 						</div>
 
 					</div>
+					
 				</c:forEach>
 
 
@@ -168,7 +169,29 @@ function doAjax() {
 			</div>
 		</form:form>
 	</div>
-
+<div  class="config-home-modal modal fade" role="dialog">
+<form:form modelAttribute="newhouse" method="POST"
+			action="/osbb/newhouse">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Редагувати будинок</h4>
+				</div>
+				<div class="modal-body">
+					<input type="text" placeholder="Вулиця" class="config-home-input" />
+					<input type="text" placeholder="Номер" class="config-home-input" />
+					<button type="button" class="delete-home-btn" data-dismiss="modal"
+						data-toggle="modal" data-target="#delete-home-modal">Видалити
+						будинок</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="add-news-btn">Зберегти</button>
+				</div>
+			</div>
+		</div>
+		</form:form>
+	</div>
 	<div id="delete-modal" class="modal fade" role="dialog">
 		
 			<div class="modal-dialog">
@@ -195,26 +218,7 @@ function doAjax() {
 		
 	</div>
 
-	<div id="config-home-modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Редагувати будинок</h4>
-				</div>
-				<div class="modal-body">
-					<input type="text" placeholder="Вулиця" class="config-home-input" />
-					<input type="text" placeholder="Номер" class="config-home-input" />
-					<button type="button" class="delete-home-btn" data-dismiss="modal"
-						data-toggle="modal" data-target="#delete-home-modal">Видалити
-						будинок</button>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="add-news-btn">Зберегти</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<div id="delete-home-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">

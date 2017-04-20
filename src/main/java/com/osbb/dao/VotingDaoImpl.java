@@ -56,7 +56,7 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 
 	@Override
 	public List<Voting> getAllOsbbVotings(int osbbId) {
-		Criteria crit = createEntityCriteria().setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		Criteria crit = createEntityCriteria().setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).addOrder(Order.asc("id"));
 		crit.add(Restrictions.eq("osbbId", osbbId));
 		List<Voting> votings = (List<Voting>) crit.list();
 		return votings;
@@ -102,9 +102,10 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 		Query query = sessionFactory.getCurrentSession()
 				.createQuery("SELECT COUNT(*) FROM Voting voting "
 						+ "INNER JOIN voting.variants variant INNER JOIN variant.votes vote  " 
-						+ "WHERE vote.variant.id = " + variantId + " GROUP BY userId");
+						+ "WHERE vote.variant.id = " + variantId + " GROUP BY variant.id");
 		try {
 			int count = (int) (long) query.uniqueResult();
+			System.out.println("from numberOfVotedForVariant= "+ count);
 			return count;
 		} catch (NullPointerException e) {
 			return 0;

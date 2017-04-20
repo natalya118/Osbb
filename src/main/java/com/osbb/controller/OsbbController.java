@@ -171,8 +171,7 @@ public class OsbbController {
 
 	@RequestMapping(value = { "/reset/{id}" }, method = RequestMethod.GET)
 	public HttpStatus resetOwnerCredentials(@PathVariable String id){
-		System.out.println("------------------------------------------------------------");
-		System.out.println("HERE---------------------------------------");
+
 		try{
 		User old = userService.findById(Integer.parseInt(id));
 		Realty r = old.getRealty();

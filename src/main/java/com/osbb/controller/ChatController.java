@@ -158,6 +158,8 @@ public class ChatController {
 	@SendTo("/topic/messages/{id}")
 	public Message mess(@DestinationVariable String id, final Message mess) throws Exception {
 		mess.setDateAdded(new Date());
+		mess.setChatId(Integer.parseInt(id));
+
 
 		messageService.saveMessage(mess);
 

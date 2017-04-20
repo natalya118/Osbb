@@ -76,9 +76,9 @@
 
 					<c:forEach items="${news}" var="n">
 						<li class="clearfix">
-							<button type="button" class="close" data-toggle="modal"
-								onclick="setId()" data-target="#delete-modal" id="delbutton"
-								value="${n.id}">&times;</button>
+							<a href="<c:url value='/news/remove/${n.id}' />"><button type="button" class="close" data-toggle="modal"
+								 id="delbutton"
+								value="${n.id}">&times;</button></a>
 							<div class="category good">Новина</div>
 							<div class="about">
 								<div class="name">${n.title}</div>
