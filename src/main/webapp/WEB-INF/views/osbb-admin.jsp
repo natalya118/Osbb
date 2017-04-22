@@ -4,6 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <html>
 
 <head>
@@ -41,36 +43,36 @@
 	rel="stylesheet" />
 <link href="<c:url value='/static/resources/css/osbbpage.css' />"
 	rel="stylesheet" />
-	
-	<script type="text/javascript">
-	function setId(){
-		$(".to-reset").attr('id',  $(".set-reset").attr('id'));
-		
-		
+
+<script type="text/javascript">
+	function setId() {
+		$(".to-reset").attr('id', $(".set-reset").attr('id'));
+
 	}
-	
-function doAjax() {
-	urlto = '/osbb/reset/' + $(".to-reset").attr('id');
-	console.log(urlto);
-  $.ajax({
-    url: urlto,
-    type: 'GET',
-    success: function(data) {
-    	location.reload();
-    },
-  error: function(){}
-    
-  });
-  
-  location.reload();
- }
+
+	function doAjax() {
+		urlto = '/osbb/reset/' + $(".to-reset").attr('id');
+		console.log(urlto);
+		$.ajax({
+			url : urlto,
+			type : 'GET',
+			success : function(data) {
+				location.reload();
+			},
+			error : function() {
+			}
+
+		});
+
+		location.reload();
+	}
 </script>
 </head>
 
 <body>
 	<%@include file="left_menu.jsp"%>
 	<div class="supreme-container">
-		
+
 		<div class="container clearfix">
 			<div class="osbb-cont">
 				<div class="img-cont">
@@ -89,52 +91,54 @@ function doAjax() {
 						<div class="address">
 							<span class="address2" data-toggle="collapse"
 								data-target="#table${house.id}">${house.street},
-								${house.number} (${house.numberOfFlats} квартир)</span> <span class="pdf" data-toggle="modal"
-								data-target="#pdf-modal">pdf</span> <span
-								class="config pe-7s-config" data-toggle="modal"
+								${house.number} (${house.numberOfFlats} квартир)</span> <span
+								class="pdf" data-toggle="modal" data-target="#pdf-modal">pdf</span>
+							<span class="config pe-7s-config" data-toggle="modal"
 								data-target=".config-home-modal"></span>
 						</div>
-
-						<div class="table collapse" id="table${house.id}">
-							<table>
-								<thead>
-									<tr>
-										<th>Ім'я</th>
-										<th>Прізвище</th>
-										<th>№ квартири</th>
-										<th>e-mail</th>
-										<th>Логін</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${house.realties}" var="realty">
+						<sec:authorize access="hasRole('ADMIN')">
+							<div class="table collapse" id="table${house.id}">
+								<table>
+									<thead>
 										<tr>
-											<td class="name">${realty.owner.firstName}</td>
-											<td class="lastname">${realty.owner.lastName}</td>
-											<td class="apartment">${realty.realtyNumber}</td>
-											<td class="email">${realty.owner.email}</td>
-											<td class="login">${realty.owner.ssoId}</td>
-											<td data-toggle="modal" data-target="#delete-modal"
-												class="delete" ><button type="button" class="close set-reset"
-													id="${realty.owner.id}" onClick="setId()">&times;</button></td>
+											<th>Ім'я</th>
+											<th>Прізвище</th>
+											<th>№ квартири</th>
+											<th>e-mail</th>
+											<th>Логін</th>
+											<th></th>
 										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${house.realties}" var="realty">
+											<tr>
+												<td class="name">${realty.owner.firstName}</td>
+												<td class="lastname">${realty.owner.lastName}</td>
+												<td class="apartment">${realty.realtyNumber}</td>
+												<td class="email">${realty.owner.email}</td>
+												<td class="login">${realty.owner.ssoId}</td>
+												<td data-toggle="modal" data-target="#delete-modal"
+													class="delete"><button type="button"
+														class="close set-reset" id="${realty.owner.id}"
+														onClick="setId()">&times;</button></td>
+											</tr>
 
-									</c:forEach>
+										</c:forEach>
 
-								</tbody>
-							</table>
-						</div>
-
+									</tbody>
+								</table>
+							</div>
+						</sec:authorize>
 					</div>
-					
+
 				</c:forEach>
 
-
+<sec:authorize access="hasRole('ADMIN')">
 				<button class="new-home" data-toggle="modal"
 					data-target="#new-home-modal">
 					<i class="fa fa-plus"></i><span>Додати будинок</span>
 				</button>
+				</sec:authorize>
 			</div>
 		</div>
 		<img id="back" src="111.png">
@@ -169,56 +173,56 @@ function doAjax() {
 			</div>
 		</form:form>
 	</div>
-<div  class="config-home-modal modal fade" role="dialog">
-<form:form modelAttribute="newhouse" method="POST"
+	<div class="config-home-modal modal fade" role="dialog">
+		<form:form modelAttribute="newhouse" method="POST"
 			action="/osbb/newhouse">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Редагувати будинок</h4>
-				</div>
-				<div class="modal-body">
-					<input type="text" placeholder="Вулиця" class="config-home-input" />
-					<input type="text" placeholder="Номер" class="config-home-input" />
-					<button type="button" class="delete-home-btn" data-dismiss="modal"
-						data-toggle="modal" data-target="#delete-home-modal">Видалити
-						будинок</button>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="add-news-btn">Зберегти</button>
-				</div>
-			</div>
-		</div>
-		</form:form>
-	</div>
-	<div id="delete-modal" class="modal fade" role="dialog">
-		
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Скинути користувача</h4>
+						<h4 class="modal-title">Редагувати будинок</h4>
 					</div>
 					<div class="modal-body">
-						Ви дійсно бажаєте скинути цього користувача?
-						<div class="tip">
-							<i class="fa fa-question"></i><span class="tip-text">Система
-								згенерує нові дані для входу</span>
-						</div>
+						<input type="text" placeholder="Вулиця" class="config-home-input" />
+						<input type="text" placeholder="Номер" class="config-home-input" />
+						<button type="button" class="delete-home-btn" data-dismiss="modal"
+							data-toggle="modal" data-target="#delete-home-modal">Видалити
+							будинок</button>
 					</div>
 					<div class="modal-footer">
-					
-							<button type="submit" class="yes-btn to-reset" onClick="doAjax()">Так</button>
-						
-						<button type="button" class="no-btn" data-dismiss="modal">Ні</button>
+						<button type="button" class="add-news-btn">Зберегти</button>
 					</div>
 				</div>
 			</div>
-		
+		</form:form>
+	</div>
+	<div id="delete-modal" class="modal fade" role="dialog">
+
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Скинути користувача</h4>
+				</div>
+				<div class="modal-body">
+					Ви дійсно бажаєте скинути цього користувача?
+					<div class="tip">
+						<i class="fa fa-question"></i><span class="tip-text">Система
+							згенерує нові дані для входу</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+
+					<button type="submit" class="yes-btn to-reset" onClick="doAjax()">Так</button>
+
+					<button type="button" class="no-btn" data-dismiss="modal">Ні</button>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
-	
+
 
 	<div id="delete-home-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">

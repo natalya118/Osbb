@@ -77,12 +77,13 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 	}
 
 	public void completelyLiked(int osbbId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("SELECT variant.id FROM Variant variant WHERE NOT EXISTS (SELECT u.id FROM User u WHERE u.osbbId = " + osbbId
-				+ " AND NOT EXISTS (SELECT vote.userId FROM Vote vote WHERE vote.userId = u.id AND vote.variant.id = variant.id))");
+		Query query = sessionFactory.getCurrentSession().createQuery("SELECT variant.id FROM Variant variant "
+				+ "WHERE NOT EXISTS "
+				+ "(SELECT u.id FROM User u WHERE u.osbbId = " + osbbId
+				+ " AND NOT EXISTS (SELECT vote.userId FROM Vote vote WHERE vote.userId = u.id"
+				+ " AND vote.variant.id = variant.id))");
 		List count = query.list();
-		System.out.println("-----------------------------------------------------------------LIKED------");
-
-		System.out.println(count);
+		
 	}
 
 	public int numberOfVotedUsers(int votingId) {
@@ -105,7 +106,6 @@ public class VotingDaoImpl extends AbstractDao<Integer, Voting> implements Votin
 						+ "WHERE vote.variant.id = " + variantId + " GROUP BY variant.id");
 		try {
 			int count = (int) (long) query.uniqueResult();
-			System.out.println("from numberOfVotedForVariant= "+ count);
 			return count;
 		} catch (NullPointerException e) {
 			return 0;

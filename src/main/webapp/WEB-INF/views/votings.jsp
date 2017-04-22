@@ -69,10 +69,12 @@
 	<div class="supreme-container">
 		<div class="container clearfix">
 			<div class="osbb-news-list pol" id="osbb-news-list">
+			<sec:authorize access="hasRole('ADMIN')">
 				<button class="new-poll" data-toggle="modal"
 					data-target="#new-news-modal">
 					<i class="fa fa-plus"></i><span>Додати голосування</span>
 				</button>
+				</sec:authorize>
 				<div class="search">
 					<input type="text" placeholder="search" /> <i class="fa fa-search"></i>
 				</div>
@@ -86,24 +88,19 @@
 							<div class="about poll">
 								<div class="name">${v.topic}</div>
 								<div class="poll-info">
-									<div>${v.topic}</div>
 									<div id="more-news${v.id}" class="collapse more-news">
 										${v.description}</div>
 									<button class="show-more" data-toggle="collapse"
 										data-target="#more-news${v.id}">Детальніше</button>
 								</div>
 								<div class="details polli">
-								<sec:authorize access="hasRole('USER')">
+								
 
 									<c:if test="${! v.voted}">
 										<c:forEach items="${v.variants}" var="var">
 											<div class="col-sm-2 col-xs-6 col-lg-2 col-md-2 first">
 												<div class="ch-item ch-img-1 btn-poll" id="${var.id}" >
-													<div class="ch-info">
-														<h1 style="font-size:40px; text-align: center;"><i class="pe pe-7s-like"></i></h1>
-														
-
-													</div>
+	
 													</div>
 													<div class="answer"><a href="<c:url value='/votings/vote/${var.id}' />">${var.variant}</a></div>
 												
@@ -111,7 +108,9 @@
 											</div>
 										</c:forEach>
 									</c:if>
-									</sec:authorize>
+									<c:if test="${v.voted}">
+									Дякуємо, ваш голос було враховано!
+									</c:if>
 									<sec:authorize access="hasRole('ADMIN')">
 									<c:forEach items="${v.variants}" var="var">
 											<div class="col-sm-2 col-xs-6 col-lg-2 col-md-2 first" id="${var.id}">

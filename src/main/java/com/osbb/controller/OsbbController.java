@@ -77,44 +77,7 @@ public class OsbbController {
 	@RequestMapping(value = { "/newhouse" }, method = RequestMethod.POST)
 	public String newHouse(@Valid NewHouse newhouse, BindingResult result, ModelMap model) {
 
-		Document document = new Document();
-		try {
-			@SuppressWarnings("unused")
-			PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream("D:/HelloWorld.pdf"));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (DocumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		document.open();
-		
-		Paragraph paragraph1 = new Paragraph("This is Paragraph 1");
-		Paragraph paragraph2 = new Paragraph("This is Paragraph 2");
-		paragraph1.setIndentationLeft(80);
-		paragraph1.setIndentationRight(80);
-		paragraph1.setAlignment(Element.ALIGN_CENTER);
-		paragraph1.setSpacingAfter(15);
-		paragraph2.setSpacingBefore(15);
-		paragraph2.setAlignment(Element.ALIGN_LEFT);
-		Phrase phrase = new Phrase("This is a large sentence.");
-		for(int count = 0;count<10;count++)
-		{
-				paragraph1.add(phrase);
-				paragraph2.add(phrase);
-		}
-		
-		try {
-			document.add(paragraph1);
-			document.add(paragraph2);
-		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		document.close();
+
 		House house = new House();
 		house.setNumber(newhouse.getNumber());
 		house.setStreet(newhouse.getStreet());
@@ -154,7 +117,39 @@ public class OsbbController {
 		house.setRealties(foo);
 
 		houseService.updateHouse(house);
+		Document document = new Document();
+		try {
+			@SuppressWarnings("unused")
+			PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream("D:/houses.pdf"));
+		} catch (FileNotFoundException e1) {
+			
+			e1.printStackTrace();
+		} catch (DocumentException e1) {
+			
+			e1.printStackTrace();
+		}
+		document.open();
+		for(Realty r: house.getRealties()){
+		Paragraph paragraph1 = new Paragraph("Ћог≥н: "+r.getOwner().getSsoId());
+		Paragraph paragraph2 = new Paragraph("ѕароль: "+r.getOwner().getPassword());
+		paragraph1.setIndentationLeft(80);
+		paragraph1.setIndentationRight(80);
+		paragraph1.setAlignment(Element.ALIGN_CENTER);
+		paragraph1.setSpacingAfter(15);
+		paragraph2.setSpacingBefore(15);
+		paragraph2.setAlignment(Element.ALIGN_LEFT);
+
 		
+		try {
+			document.add(paragraph1);
+			document.add(paragraph2);
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		document.close();
 		List<House> houses = houseService.getAllHouses(1);
 		
 		//model.addAttribute("houses", houses);

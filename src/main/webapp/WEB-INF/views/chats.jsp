@@ -5,6 +5,8 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 
 <head>
@@ -100,11 +102,12 @@ function getUsers(){
 
 		<div class="container clearfix">
 			<div class="people-list" id="people-list">
+			<sec:authorize access="hasRole('ADMIN')">
 				<button class="new-dialog" data-toggle="modal"
 					data-target="#new-dialog-modal">
 					<i class="fa fa-plus"></i><span>Новий діалог</span>
 				</button>
-
+</sec:authorize>
 				<div class="search">
 					<input type="text" placeholder="search" /> <i class="fa fa-search"></i>
 				</div>

@@ -77,10 +77,7 @@ public class AppController {
 
 	@Autowired
 	OsbbService osbbService;
-	
-	/**
-	 * This method will list all existing users.
-	 */
+
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
 
@@ -257,7 +254,7 @@ public class AppController {
 		if (isCurrentAuthenticationAnonymous()) {
 			return "login";
 	    } else {
-	    	return "redirect:/osbbadmin";  
+	    	return "redirect:/list";  
 	    }
 	}
     @RequestMapping(

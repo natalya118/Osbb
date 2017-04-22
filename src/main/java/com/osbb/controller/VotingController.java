@@ -156,8 +156,6 @@ public class VotingController {
 	
 	@RequestMapping(value = { "/vote/{id}" }, method = RequestMethod.GET)
 	public String vote(@PathVariable String id){
-		System.out.println("------------------------------------------------------------");
-		System.out.println("HERE---------------------------------------");
 		Vote vote = new Vote();
 		vote.setUserId(userService.findBySSO(getPrincipal()).getId());
 		Variant var = variantService.getVariantById(Integer.parseInt(id));
