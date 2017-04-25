@@ -37,7 +37,7 @@
 		<img
 			src="<c:url value='/static/houses.png'/>" />
 		<form:form method="POST" modelAttribute="osbb_creator"
-			action="/osbb/newosbb" id="msform">
+			action="/osbb/newosbb" id="msform" accept-charset="UTF-8">
 			<form:input type="hidden" path="creator.id" id="id" />
 			<form:input type="hidden" path="osbb.id" id="ido" />
 			<div id="connector12"></div>

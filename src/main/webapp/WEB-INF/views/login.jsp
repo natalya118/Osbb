@@ -13,6 +13,8 @@
 </head>
 
 <body>
+<img
+			src="<c:url value='/static/houses.png'/>" />
 	<c:url var="loginUrl" value="/login" />
 	<form action="${loginUrl}" method="post" class="sign-up">
 		<h1 class="sign-up-title">Увійти в систему</h1>

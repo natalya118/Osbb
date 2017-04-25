@@ -142,6 +142,8 @@ public class AppController {
 			
 			osbbService.saveOsbb(osbb);
 
+			System.out.println("---------------------New osbb--------");
+			System.out.println(osbb.toString());
 			User newUser = osbb_creator.getCreator();
 			newUser.setOsbbId(osbb.getId());
 			Set<UserProfile> userProfiles = new HashSet<UserProfile>(); 
