@@ -522,6 +522,7 @@ width:25px;
       <div class="chat-history">
         <ul>
         <c:forEach items="${messages}" var="message">
+        
           <li class="clearfix">
             <div class="message-data align-right">
               <span class="message-data-time" >${message.dateAdded}</span> &nbsp; &nbsp;
@@ -532,6 +533,8 @@ width:25px;
               ${message.messageText}
             </div>
           </li>
+        
+          
           </c:forEach>
           
           

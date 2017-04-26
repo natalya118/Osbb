@@ -78,13 +78,12 @@ public class AppController {
 	@Autowired
 	OsbbService osbbService;
 
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
-	public String listUsers(ModelMap model) {
+	@RequestMapping(value = { "/mainpage" }, method = RequestMethod.GET)
+	public String main(ModelMap model) {
 
-		List<User> users = userService.findAllUsers();
-		model.addAttribute("users", users);
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "userslist";
+		
+		//model.addAttribute("loggedinuser", getPrincipal());
+		return "main";
 	}
 	
 	/**
@@ -151,10 +150,10 @@ public class AppController {
 			newUser.setUserProfiles(userProfiles);
 			userService.saveUser(newUser);
 			
-		model.addAttribute("loggedinuser", getPrincipal());
+		//model.addAttribute("loggedinuser", getPrincipal());
 		
 		
-		return "test";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = { "/generatepasswords" }, method = RequestMethod.POST)

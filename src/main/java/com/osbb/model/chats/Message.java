@@ -42,7 +42,17 @@ public class Message {
 	//@NotEmpty
 	@Column(name = "date_added")
 	private Date dateAdded;
+	
 
+	private boolean ñurUserMessage;
+
+
+	public boolean isÑurUserMessage() {
+		return ñurUserMessage;
+	}
+	public void setÑurUserMessage(boolean ñurUserMessage) {
+		this.ñurUserMessage = ñurUserMessage;
+	}
 	public Date getDateAdded() {
 		return dateAdded;
 	}

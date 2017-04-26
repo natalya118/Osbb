@@ -144,6 +144,12 @@ public class ChatController {
 
 		System.out.println("chat id ------------------ " + chatid);
 		List<Message> messages = chatService.getChatMessages(chatid);
+		for(Message m:messages){
+			if(m.getAuthorId()==userService.findBySSO(getPrincipal()).getId())
+				m.set—urUserMessage(true);
+			else
+				m.set—urUserMessage(false);
+		}
 
 		model.addAttribute("messages", messages);
 		Chat chat = chatService.getChatById(chatid);
