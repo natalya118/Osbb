@@ -77,7 +77,7 @@
 			<div class="osbb-cont">
 				<div class="img-cont">
 					<img
-						src="http://s3-us-west-1.amazonaws.com/witty-avatars/default-avatar-5-l.jpg"
+						src="https://previews.123rf.com/images/topvectors/topvectors1501/topvectors150100033/35634254-City-flat-illustration-Urban-landscapes-night-skyscrapers-Vector-flat-illustrations-Stock-Vector.jpg"
 						class="osbb-pic">
 				</div>
 				<div class="information">

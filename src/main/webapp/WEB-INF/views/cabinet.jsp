@@ -56,13 +56,16 @@
         <div class="supreme-container">
         
 	<%@include file="left_menu.jsp"%>
-    <div class="container clearfix">
+    <div class="container clearfix" style="min-height:100%;">
         <div class="osbb-cont">
         <div class="img-cont">
             <img src="http://s3-us-west-1.amazonaws.com/witty-avatars/default-avatar-5-l.jpg" class="osbb-pic">
         </div>
         <div class="information">
             <h1 class="osbb-title">Мій кабінет</h1>
+            <img
+						src="http://s3-us-west-1.amazonaws.com/witty-avatars/default-avatar-5-l.jpg"
+						class="osbb-pic" style="z-index:100;">
             <div class="address">
                 <p class="address1" style="color:#777">Моя адреса</p>
                 <p class="address1" style="color:#aaa">${realty.house.street}, ${realty.house.number}, кв. ${realty.realtyNumber}, </p>

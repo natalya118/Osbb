@@ -282,7 +282,7 @@ public class AppController {
 		}
 		return "redirect:/login?logout";
 	}
-	@RequestMapping(value = { "/cabinet" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/","/cabinet" }, method = RequestMethod.GET)
 	public String cabinet(ModelMap model) {
 		User user = userService.findBySSO(getPrincipal());
 		model.addAttribute("user", user);
