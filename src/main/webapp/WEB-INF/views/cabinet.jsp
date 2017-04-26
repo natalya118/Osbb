@@ -71,9 +71,12 @@
             <h2>Інформація про мене</h2>
             <form:form modelAttribute="chat_users" method="POST" 
 			action="/osbb/edit-user-${loggedinuser}">
+			<h3>Ім'я</h3>
             <input type="text" class="cab-input" placeholder="Ім'я" autofocus><br>
+            <h3>Прізвище</h3>
             <input type="text" class="cab-input" placeholder="Прізвище"><br>
-            <input type="password" class="cab-input" placeholder="${loggedinuser}"><br>
+            <h3>Логін</h3>
+            <input type="text" class="cab-input" placeholder="${loggedinuser}"><br>
             <input type="submit" value="Змінити" class="cab-button">
             </form:form>
         </div>

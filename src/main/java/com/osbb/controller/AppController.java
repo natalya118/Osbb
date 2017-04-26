@@ -195,7 +195,7 @@ public class AppController {
 	 * This method will be called on form submission, handling POST request for
 	 * updating user in database. It also validates the user input
 	 */
-	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/cabinet" }, method = RequestMethod.POST)
 	public String updateUser(@Valid User user, BindingResult result,
 			ModelMap model, @PathVariable String ssoId) {
 
@@ -284,6 +284,9 @@ public class AppController {
 	}
 	@RequestMapping(value = { "/cabinet" }, method = RequestMethod.GET)
 	public String cabinet(ModelMap model) {
+		User user = userService.findBySSO(getPrincipal());
+		model.addAttribute("user", user);
+		model.addAttribute("newuser", new User());
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("realty", userService.findBySSO(getPrincipal()).getRealty());
 		
