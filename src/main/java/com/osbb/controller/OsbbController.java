@@ -68,6 +68,14 @@ public class OsbbController {
 
 		model.addAttribute("osbb", osbbService.getOsbbById(userService.findBySSO(getPrincipal()).getOsbbId()));
 		List<House> houses = houseService.getAllHouses(userService.findBySSO(getPrincipal()).getOsbbId());
+		for (House h: houses){
+			for (Realty r: h.getRealties()){
+				if(r.getId()==3)
+			
+			System.out.println("realty 3 jwner ============"+r.getRealtyOwnerId());
+				
+			}
+		}
 		model.addAttribute("houses", houses);
 
 		model.addAttribute("newhouse", new NewHouse());

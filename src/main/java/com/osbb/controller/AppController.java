@@ -98,6 +98,7 @@ public class AppController {
 		return "registration";
 	}
 
+
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
 	public String saveUser(@Valid User user, BindingResult result,
 			ModelMap model) {
@@ -199,22 +200,21 @@ public class AppController {
 			ModelMap model, @PathVariable String ssoId) {
 
 		if (result.hasErrors()) {
-			return "registration";
+			return "redirect:/cabinet";
 		}
 
-		/*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
 		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
 			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
 		    result.addError(ssoError);
-			return "registration";
-		}*/
+		    return "redirect:/cabinet";
+		}
 
 
 		userService.updateUser(user);
 
 		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " updated successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
-		return "registrationsuccess";
+		return "redirect:/cabinet";
 	}
 
 	
@@ -255,7 +255,7 @@ public class AppController {
 		if (isCurrentAuthenticationAnonymous()) {
 			return "login";
 	    } else {
-	    	return "redirect:/list";  
+	    	return "redirect:/cabinet";  
 	    }
 	}
     @RequestMapping(
@@ -282,6 +282,14 @@ public class AppController {
 		}
 		return "redirect:/login?logout";
 	}
+	@RequestMapping(value = { "/cabinet" }, method = RequestMethod.GET)
+	public String cabinet(ModelMap model) {
+		model.addAttribute("loggedinuser", getPrincipal());
+		model.addAttribute("realty", userService.findBySSO(getPrincipal()).getRealty());
+		
+		return "cabinet";
+	}	
+	
 
 	/**
 	 * This method returns the principal[user-name] of logged-in user.

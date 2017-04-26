@@ -9,7 +9,7 @@
 		</a></li>
 		<li><a href="<c:url value='/votings/all' />"> <i class="pe pe-7s-like"></i> <span>Голосування</span>
 		</a></li>
-		<li><a href="#"> <i class="pe pe-7s-user"></i> <span>Мій профіль</span>
+		<li><a href="<c:url value='/cabinet' />"> <i class="pe pe-7s-user"></i> <span>Мій кабінет</span>
 		</a></li>
 		<li><a href="<c:url value='/logout' />"> <i class="pe pe-7s-back"></i> <span>Вийти</span>
 		</a></li>
