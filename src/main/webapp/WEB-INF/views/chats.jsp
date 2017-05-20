@@ -121,9 +121,7 @@ function getUsers(){
 									<a href="<c:url value='/chats/${chat.id}' />"
 										class="tochat${chat.id}">${chat.topic}</a>
 								</div>
-								<div class="status">
-									<i class="fa fa-circle online"></i> в мережі
-								</div>
+								
 								<div class="last-messsage">
 									<div class="last-message-text">Останнє повідомлення</div>
 									<div class="last-message-time">10:10, Сьогодні</div>
@@ -155,9 +153,7 @@ function getUsers(){
 									<li class="clearfix">
 										<div class="about">
 											<div class="name">${u.ssoId}</div>
-											<div class="status">
-												<i class="fa fa-circle online"></i> в мережі
-											</div>
+											
 											<div class="toggles">
 												<input type="checkbox" name="checkbox${u.ssoId}" id="checkbox${u.ssoId}"
 													value="${u.ssoId}" class="ios-toggle" /> <label

@@ -66,12 +66,15 @@ public class ChatController {
 	}
 
 	@RequestMapping(value = { "/", "/all" }, method = RequestMethod.GET)
-	public String listUsers(ModelMap model) {
+	public String all(ModelMap model) {
 
 		List<Chat> chats = chatService.getAllChats(userService.findBySSO(getPrincipal()).getId());
 		model.addAttribute("chats", chats);
 		model.addAttribute("chat_users", new Chat_Users());
 		model.addAttribute("loggedinuser", getPrincipal());
+		List<User> users = userService.findAllUsers(userService.findBySSO(getPrincipal()).getOsbbId());
+		users.remove(userService.findBySSO(getPrincipal()));
+		
 		model.addAttribute("allusers", userService.findAllUsers(userService.findBySSO(getPrincipal()).getOsbbId()));
 		return "chats";
 	}
@@ -117,6 +120,7 @@ public class ChatController {
 		for (int i = 0; i < items.length; i++) {
 			chatService.addUserToChat(chat.getId(), userService.findBySSO(items[i]).getId());
 		}
+		//chatService.addUserToChat(chat.getId(), userService.findBySSO(getPrincipal()).getId());
 		List<Chat> chats = chatService.getAllChats(userService.findBySSO(getPrincipal()).getId());
 		model.addAttribute("chats", chats);
 		model.addAttribute("chat_users", new Chat_Users());
@@ -142,7 +146,23 @@ public class ChatController {
 	@RequestMapping(value = { "/", "/{chatid}" }, method = RequestMethod.GET)
 	public String chatMessages(@PathVariable int chatid, ModelMap model) {
 
-		System.out.println("chat id ------------------ " + chatid);
+		System.out.println(chatService.getChatMembers(chatid).toString());
+		try{
+			chatService.getChatMembers(chatid);
+			if(chatService.getChatMembers(chatid).size()==0){
+				return "redirect:/chats/all";
+			}
+		}
+		catch(Exception e){
+			return "redirect:/chats/all";
+		}
+		if(!chatService.getChatMembers(chatid).contains(userService.findBySSO(getPrincipal()))){
+			if(!userService.findBySSO(getPrincipal()).equals(chatService.getChatMembers(chatid).get(0))){
+				System.out.println("--------**************************");
+			}
+			System.out.println("----------------------------------------------------"+ chatService.getChatMembers(chatid).get(0).getSsoId());
+			return "redirect:/chats/all";
+		}
 		List<Message> messages = chatService.getChatMessages(chatid);
 		for(Message m:messages){
 			if(m.getAuthorId()==userService.findBySSO(getPrincipal()).getId())

@@ -178,6 +178,7 @@ ul{
 .news-list li{
     border-radius: 35px;
     margin-left: 2%;
+    margin-bottom:20px;
     width: 80%;
 }
 
